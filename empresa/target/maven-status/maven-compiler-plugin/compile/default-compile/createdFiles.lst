@@ -1,9 +1,13 @@
 com\mycompany\bean\LoginBean.class
 com\mycompany\DAO\DataSource.class
-com\mycompany\dominio\Personas.class
 com\mycompany\DAO\DAOAbstract.class
-com\mycompany\dominio\Personas_.class
+com\mycompany\dominio\Usuario_Rol_.class
 com\mycompany\DAO\UsuarioDao.class
-com\mycompany\DAO\ConfigXml.class
 com\mycompany\dominio\Usuario.class
 com\mycompany\dominio\Usuario_.class
+com\mycompany\dominio\Rol_.class
+com\mycompany\filter\AuthorizationFilter.class
+com\mycompany\bean\AccesoBean.class
+com\mycompany\DAO\ConfigXml.class
+com\mycompany\dominio\Rol.class
+com\mycompany\dominio\Usuario_Rol.class

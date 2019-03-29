@@ -23,58 +23,103 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idLogin;
-    @Column(nullable = false, columnDefinition = "varchar(50)")
-    private String user;
+    private int usu_id;
     @Column(nullable = false, columnDefinition = "varchar(30)")
-    private String password;
-  
+    private String usu_nombre;
+    @Column(nullable = false, columnDefinition = "varchar(30)")
+    private String usu_login;
+    @Column(nullable = false, columnDefinition = "varchar(50)")
+    private String usu_password;
+    @Column(nullable = false, columnDefinition = "varchar(15)")
+    private String estado;
+    @Column(nullable = false, columnDefinition = "varchar(15)")
+    private String identificacion;
+
+    /**
+     * @return the usu_id
+     */
+    public int getUsu_id() {
+        return usu_id;
+    }
+
+    /**
+     * @param usu_id the usu_id to set
+     */
+    public void setUsu_id(int usu_id) {
+        this.usu_id = usu_id;
+    }
+
+    /**
+     * @return the usu_nombre
+     */
+    public String getUsu_nombre() {
+        return usu_nombre;
+    }
+
+    /**
+     * @param usu_nombre the usu_nombre to set
+     */
+    public void setUsu_nombre(String usu_nombre) {
+        this.usu_nombre = usu_nombre;
+    }
+
+    /**
+     * @return the usu_login
+     */
+    public String getUsu_login() {
+        return usu_login;
+    }
+
+    /**
+     * @param usu_login the usu_login to set
+     */
+    public void setUsu_login(String usu_login) {
+        this.usu_login = usu_login;
+    }
+
+    /**
+     * @return the usu_password
+     */
+    public String getUsu_password() {
+        return usu_password;
+    }
+
+    /**
+     * @param usu_password the usu_password to set
+     */
+    public void setUsu_password(String usu_password) {
+        this.usu_password = usu_password;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the identificacion
+     */
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    /**
+     * @param identificacion the identificacion to set
+     */
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
    
  
-    /**
-     * @return the idUsuario
-     */
-   
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * @return the idLogin
-     */
-    public int getIdLogin() {
-        return idLogin;
-    }
-
-    /**
-     * @param idLogin the idLogin to set
-     */
-    public void setIdLogin(int idLogin) {
-        this.idLogin = idLogin;
-    }
-
-    /**
-     * @return the user
-     */
-    public String getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    
 
     
 }

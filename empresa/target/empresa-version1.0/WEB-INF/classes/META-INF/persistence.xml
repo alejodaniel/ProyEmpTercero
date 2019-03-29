@@ -3,9 +3,9 @@
   <persistence-unit name="ProyectPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:/jboss/datasources/ProyectPU</jta-data-source>
-    <class>com.mycompany.dominio.Personas</class>
     <class>com.mycompany.dominio.Usuario</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <class>com.mycompany.dominio.Rol</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.sharedCache.mode" value="ALL"/>
       <property name="eclipselink.cache.shared.default" value="false"/>

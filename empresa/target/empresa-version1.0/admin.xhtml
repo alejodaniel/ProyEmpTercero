@@ -1,39 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"></link>
+
     <h:head>
-        <title>BOTON JSF</title>
+        <title>LOGIN</title>
 
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </h:head>
-    <body>
-        <div>TODO write content</div>
-        <h:form class="center-align"> 
-            <span style="font-size: 45px; color: red;">
-                <i class="fab fa-android"></i>
-            </span>
-            <p:button value="hola"/>
-        </h:form>
-        <span style="font-size: 50px; color: Dodgerblue;">
-            <i class="fas fa-user-secret "></i>
-        </span><br/>
-        <span style="font-size: 3rem;">
-            <span style="color: Mediumslateblue;">
-                <i class="fas fa-igloo"></i>
-            </span>
-        </span>
-    </body>
+    <h:body styleClass="blue lighten-5">
+        <p:growl id="mensaje"/>
+
+        <div class="valign-wrapper" id="login-page">
+            <div class="container">
+                <div class="center-align">
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h5>ACCESO ADMIN</h5>
+                                    <!-- <img class="responsive-image" style="max-width: 120px" src="edit3.jpg"/>-->
+                                    <h:graphicImage library="images" name="iepi.png" style="max-width: 120px"></h:graphicImage>
+                                    <div class="center-align">
+                                        <h:form id="login-form">
+                                            <div class="row">
+                                                <span style="font-size: 25px; color: black;">
+                                                    <i class="far fa-user"></i>
+                                                </span>
+                                                <h:outputText value="USUARIO" />
+                                                <h:inputText id="username" value="#{accesoBean.username}" required="true" 
+                                                             requiredMessage="Falta el username"></h:inputText>
+                                                <h:message for="username"></h:message>
+                                                <br></br><br></br>
+                                                <span style="font-size: 25px; color: black;">
+                                                   <i class="fas fa-unlock-alt"></i>
+                                                </span>
+                                                    <h:outputText value="CONTRASEÑA" />
+                                                    <h:inputSecret id="password" value="#{accesoBean.password}" required="true"
+                                                                   requiredMessage="Falta la contraseña"></h:inputSecret>
+                                                    <h:message for="password"></h:message>
+                                                    <br></br><br></br>
+                                                    <div class="center-align"> 
+                                                        
+                                                        <p:commandButton id="loginButton" value="ACCEDER"
+                                                                         actionListener="#{accesoBean.login}"
+                                                                         update="mensaje"/>
+                                                    </div>
+                                            </div>                                               
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
 </html>
