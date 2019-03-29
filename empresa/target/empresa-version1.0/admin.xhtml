@@ -13,7 +13,7 @@
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </h:head>
-    <h:body styleClass="blue lighten-5">
+    <h:body styleClass="blue">
         <p:growl id="mensaje"/>
 
         <div class="valign-wrapper" id="login-page">
@@ -23,7 +23,7 @@
                         <div class="col s6 offset-s3">
                             <div class="card">
                                 <div class="card-content">
-                                    <h5>ACCESO ADMIN</h5>
+                                    <h5><b>ACCESO ADMIN </b></h5>
                                     <!-- <img class="responsive-image" style="max-width: 120px" src="edit3.jpg"/>-->
                                     <h:graphicImage library="images" name="iepi.png" style="max-width: 120px"></h:graphicImage>
                                     <div class="center-align">
@@ -32,25 +32,27 @@
                                                 <span style="font-size: 25px; color: black;">
                                                     <i class="far fa-user"></i>
                                                 </span>
-                                                <h:outputText value="USUARIO" />
+                                                <h:outputText value="USUARIO" style="font-weight:bold"/>
                                                 <h:inputText id="username" value="#{accesoBean.username}" required="true" 
                                                              requiredMessage="Falta el username"></h:inputText>
                                                 <h:message for="username"></h:message>
                                                 <br></br><br></br>
                                                 <span style="font-size: 25px; color: black;">
-                                                   <i class="fas fa-unlock-alt"></i>
+                                                    <i class="fas fa-unlock-alt"></i>
                                                 </span>
-                                                    <h:outputText value="CONTRASEÑA" />
-                                                    <h:inputSecret id="password" value="#{accesoBean.password}" required="true"
-                                                                   requiredMessage="Falta la contraseña"></h:inputSecret>
-                                                    <h:message for="password"></h:message>
-                                                    <br></br><br></br>
-                                                    <div class="center-align"> 
-                                                        
-                                                        <p:commandButton id="loginButton" value="ACCEDER"
-                                                                         actionListener="#{accesoBean.login}"
-                                                                         update="mensaje"/>
-                                                    </div>
+                                                <h:outputText value="CONTRASEÑA" style="font-weight:bold"/>
+                                                <h:inputSecret id="password" value="#{accesoBean.password}" required="true"
+                                                               requiredMessage="Falta la contraseña"></h:inputSecret>
+                                                <h:message for="password"></h:message>
+                                                <br></br><br></br>
+                                                <div class="center-align"> 
+
+                                                    <p:commandButton 
+                                                        id="loginButton" value="ACCEDER"
+                                                        style="font-weight:bold"
+                                                        actionListener="#{accesoBean.login}"
+                                                        update="mensaje"/>
+                                                </div>
                                             </div>                                               
                                         </h:form>
                                     </div>
