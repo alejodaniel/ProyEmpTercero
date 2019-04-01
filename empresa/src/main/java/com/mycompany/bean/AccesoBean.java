@@ -28,7 +28,7 @@ public class AccesoBean {
             setLogeado(true);
             System.out.println("INICIO: "+getUsername());
             try {
-                context.getExternalContext().redirect("opcion.xhtml");
+                context.getExternalContext().redirect("registrar.xhtml");
             } catch (IOException e) {
                 e.printStackTrace();
             }

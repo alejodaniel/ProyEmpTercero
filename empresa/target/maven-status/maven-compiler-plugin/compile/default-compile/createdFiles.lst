@@ -4,7 +4,9 @@ com\mycompany\DAO\DAOAbstract.class
 com\mycompany\dominio\Usuario_Rol_.class
 com\mycompany\DAO\UsuarioDao.class
 com\mycompany\dominio\Usuario.class
+com\mycompany\ucc\ValidarCedulaEcuatoriana.class
 com\mycompany\dominio\Usuario_.class
+com\mycompany\bean\RegisterBean.class
 com\mycompany\dominio\Rol_.class
 com\mycompany\filter\AuthorizationFilter.class
 com\mycompany\bean\AccesoBean.class

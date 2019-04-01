@@ -133,7 +133,7 @@ public class LoginBean {
 
     public String action() {
         logeado = true;
-        return "/home.xhtml";
+        return "/opcion.xhtml";
     }
 
 //    public String logout() {
