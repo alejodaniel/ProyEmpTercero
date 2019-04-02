@@ -33,25 +33,27 @@ public class RegisterBean {
     private Usuario usuario;
     private String user;
     private String password;
-    private String estado;
+    private String estado="ACTIVO";
     private String cedula;
     private String nombre;
     private boolean logeado;
     private List<Usuario> usuarios = null;
     private List<String> lista = new ArrayList<String>();
-    private String radio = "Seleccione una opcion";
     private String md5;
+    
 
     public RegisterBean() {
 //        DataSource.getEntityManager();
-        lista.add(0, "activo");
-        lista.add(1, "inactivo");
+
     }
 
-    public void seleccionarRadio(ValueChangeEvent event) {
-        setRadio((String) event.getNewValue()); // captura el nuevo valor y lo pasas a una variable 
-        System.out.println("valor es:" + event);
-
+    {
+        lista.add(0, "ACTIVO");
+        lista.add(1, "INACTIVO");
+    }
+    public void ChangeRadio(ValueChangeEvent event){
+        estado= (String) event.getNewValue();
+        
     }
 
     public void register(ActionEvent action) {
@@ -63,7 +65,7 @@ public class RegisterBean {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         Usuario us = new Usuario();
-       md5 = getMD5(getPassword());
+        md5 = getMD5(getPassword());
         us.setUsu_login(getUser());
         us.setUsu_password(md5);
         System.out.println(getMD5(getPassword()));
@@ -79,7 +81,7 @@ public class RegisterBean {
             //me consulta en la bdd a ver si el dato ingresado no es el mismo que los q fueron ingresados
         } else if (usuarioDao.usuariosIguales(getUser()) == true) {
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "datos iguales", "datos iguales"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "el username ya existe", "el username ya existe"));
 
         } else if (usuarioDao.cedulasIguales(getCedula())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ya existe la cedula", "ya existe la cedula"));
@@ -252,23 +254,6 @@ public class RegisterBean {
         this.lista = lista;
     }
 
-    /**
-     * @return the radio
-     */
-    public String getRadio() {
-        return radio;
-    }
-
-    /**
-     * @param radio the radio to set
-     */
-    public void setRadio(String radio) {
-        this.radio = radio;
-    }
-
-    /**
-     * @return the md5
-     */
     public String getMd5() {
         return md5;
     }
@@ -279,4 +264,9 @@ public class RegisterBean {
     public void setMd5(String md5) {
         this.md5 = md5;
     }
+
+    /**
+     * @return the radio
+     */
+   
 }

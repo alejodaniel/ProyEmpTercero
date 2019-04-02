@@ -38,18 +38,15 @@
                                                         <h:outputText value="NOMBRE" style="font-weight:bold"/> &nbsp;
                                                         <h:inputText id="das" value="#{registerBean.nombre}" required="true" 
                                                                      requiredMessage="Falta el username"></h:inputText> 
-                                                       
+
                                                     </div>
                                                     <div class="form-group col-md-8">
                                                         <span style="font-size: 25px; color: black;">
                                                             <i class="fas fa-id-card"></i>
-                                                        </span>
-                                                         <h:outputText value="CEDULA" style="font-weight:bold"/> &nbsp;
-                                                         <h:inputText id="ced" value="#{registerBean.cedula}" required="true" 
-                                                                     requiredMessage="Falta la cedula"></h:inputText> 
-                                                       <!-- <h:outputText  value="CEDULA" style="font-weight:bold"/> &nbsp;
-                                                        <p:inputMask id="cedula" value="{registerBean.cedula}" mask="9999999999" required="true"
-                                                                     requiredMessage="Falta el número de cedula"/>-->
+                                                        </span>         
+                                                        <h:outputText  value="CEDULA" style="font-weight:bold"/> &nbsp;
+                                                        <p:inputMask id="cedula" value="#{registerBean.cedula}" mask="9999999999" required="true"
+                                                                     requiredMessage="Falta el número de cedula"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
@@ -58,9 +55,9 @@
                                                             <i class="fas fa-user-lock"></i>
                                                         </span>
                                                         <h:outputText value="USERNAME" style="font-weight:bold"/> &nbsp;
-                                                        <h:inputText id="user" value="#{registerBean.user}" required="true" 
+                                                        <h:inputText id="user" value="#{registerBean.user}" required="true"
                                                                      requiredMessage="Falta el username"></h:inputText> 
-                                                      
+
                                                     </div>
                                                     <div class="form-group col-md-8">
                                                         <span style="font-size: 25px; color: black;"> 
@@ -68,10 +65,23 @@
                                                         </span>
                                                         <h:outputText value="CONTRASEÑA" style="font-weight:bold"/>&nbsp;
                                                         <h:inputSecret id="password" value="#{registerBean.password}" required="true"
-                                                                       maxlength="20"
+                                                                       maxlength="20" style="text-transform: lowercase"
                                                                        requiredMessage="Falta la contraseña"></h:inputSecret>
-                                                       
-                                                    </div>
+
+                                                    </div>                                           
+                                                    <div class="form-group col-md-8">
+                                                        <span style="font-size: 25px; color: black;"> 
+                                                            <i class="fas fa-check-circle"></i>
+                                                        </span>
+                                                        <h:outputText value="ESTADO" style="font-weight:bold"/>&nbsp;
+                                                        <h:inputText id="texto" style="font-weight: bold" required="true"
+                                                                     disabled="true"  requiredMessage="falta el estado" value="#{registerBean.estado}"  />
+                                                    </div>                                                   
+                                                    <h:selectOneRadio layout="pageDirection" valueChangeListener="#{registerBean.ChangeRadio}">
+                                                        <f:selectItems value="#{registerBean.lista}" var="item" itemValue="#{item}" 
+                                                                       itemLabel="#{item}"/>
+                                                        <f:ajax render="texto"/>
+                                                    </h:selectOneRadio>
                                                 </div>
                                                 <div class="center-align">
                                                     <p:commandButton 
