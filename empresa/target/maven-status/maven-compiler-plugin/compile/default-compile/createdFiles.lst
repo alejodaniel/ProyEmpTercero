@@ -9,6 +9,7 @@ com\mycompany\dominio\Usuario_.class
 com\mycompany\bean\RegisterBean.class
 com\mycompany\dominio\Rol_.class
 com\mycompany\filter\AuthorizationFilter.class
+com\mycompany\ucc\Password.class
 com\mycompany\bean\AccesoBean.class
 com\mycompany\DAO\ConfigXml.class
 com\mycompany\dominio\Rol.class

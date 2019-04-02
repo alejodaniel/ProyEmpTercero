@@ -8,6 +8,8 @@ package com.mycompany.bean;
 import com.mycompany.DAO.DataSource;
 import com.mycompany.DAO.UsuarioDao;
 import com.mycompany.dominio.Usuario;
+import com.mycompany.ucc.Password;
+import static com.mycompany.ucc.Password.getMD5;
 import com.mycompany.ucc.ValidarCedulaEcuatoriana;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,34 +40,50 @@ public class RegisterBean {
     private List<Usuario> usuarios = null;
     private List<String> lista = new ArrayList<String>();
     private String radio = "Seleccione una opcion";
+    private String md5;
 
     public RegisterBean() {
 //        DataSource.getEntityManager();
-        lista.add(0,"activo");
-        lista.add(1,"inactivo");
+        lista.add(0, "activo");
+        lista.add(1, "inactivo");
     }
-    public void seleccionarRadio(ValueChangeEvent event){
+
+    public void seleccionarRadio(ValueChangeEvent event) {
         setRadio((String) event.getNewValue()); // captura el nuevo valor y lo pasas a una variable 
-        System.out.println("valor es:"+event);
-        
+        System.out.println("valor es:" + event);
+
     }
 
     public void register(ActionEvent action) {
         ValidarCedulaEcuatoriana vce = new ValidarCedulaEcuatoriana();
+
         UsuarioDao usuarioDao = new UsuarioDao(usuario);
         System.out.println("user:" + user);
         System.out.println("pass:" + password);
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         Usuario us = new Usuario();
+       md5 = getMD5(getPassword());
         us.setUsu_login(getUser());
-        us.setUsu_password(getPassword());
+        us.setUsu_password(md5);
+        System.out.println(getMD5(getPassword()));
+
         us.setUsu_nombre(getNombre());
         us.setIdentificacion(getCedula());
         us.setEstado(getEstado());
         if (!vce.verificarCedula(getCedula())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cedula incorrecta", "Cedula incorrecta"));
             System.out.println("mala cedula");
+
+            //boolean igual = usuarioDao.usuariosIguales(getUser());
+            //me consulta en la bdd a ver si el dato ingresado no es el mismo que los q fueron ingresados
+        } else if (usuarioDao.usuariosIguales(getUser()) == true) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "datos iguales", "datos iguales"));
+
+        } else if (usuarioDao.cedulasIguales(getCedula())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ya existe la cedula", "ya existe la cedula"));
+
         } else {
             boolean estado = usuarioDao.guardarUsuario(us);
             if (estado == true) {
@@ -246,5 +264,19 @@ public class RegisterBean {
      */
     public void setRadio(String radio) {
         this.radio = radio;
+    }
+
+    /**
+     * @return the md5
+     */
+    public String getMd5() {
+        return md5;
+    }
+
+    /**
+     * @param md5 the md5 to set
+     */
+    public void setMd5(String md5) {
+        this.md5 = md5;
     }
 }
