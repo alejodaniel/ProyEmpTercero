@@ -19,18 +19,19 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "rol")
-public class Rol implements Serializable{
+public class Rol implements Serializable {
 
     @Id
+    @Column(name = "rol_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int rol_codigo;
-    @Column(nullable = false, columnDefinition = "varchar(50)")
+    @Column(name = "rol_nombre", nullable = false, columnDefinition = "varchar(50)")
     private String rol_nombre;
-    @Column(nullable = false, columnDefinition = "varchar(50)")
+    @Column(name = "rol_id", nullable = false, columnDefinition = "varchar(50)")
     private String rol_id;
-    @Column(nullable = false, columnDefinition = "varchar(250)")
+    @Column(name = "descripcion", nullable = false, columnDefinition = "varchar(250)")
     private String descripcion;
-    @Column(nullable = false, columnDefinition = "varchar(100)")
+    @Column(name = "link", nullable = false, columnDefinition = "varchar(100)")
     private String link;
 
     /**
@@ -102,7 +103,5 @@ public class Rol implements Serializable{
     public void setLink(String link) {
         this.link = link;
     }
-   
-   
 
 }

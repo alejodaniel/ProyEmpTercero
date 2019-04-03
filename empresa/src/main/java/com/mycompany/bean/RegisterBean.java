@@ -33,14 +33,13 @@ public class RegisterBean {
     private Usuario usuario;
     private String user;
     private String password;
-    private String estado="ACTIVO";
+    private String estado = "ACTIVO";
     private String cedula;
     private String nombre;
     private boolean logeado;
     private List<Usuario> usuarios = null;
     private List<String> lista = new ArrayList<String>();
     private String md5;
-    
 
     public RegisterBean() {
 //        DataSource.getEntityManager();
@@ -51,15 +50,18 @@ public class RegisterBean {
         lista.add(0, "ACTIVO");
         lista.add(1, "INACTIVO");
     }
-    public void ChangeRadio(ValueChangeEvent event){
-        estado= (String) event.getNewValue();
-        
+
+    public void ChangeRadio(ValueChangeEvent event) {
+        estado = (String) event.getNewValue();
+
     }
 
     public void register(ActionEvent action) {
+       
         ValidarCedulaEcuatoriana vce = new ValidarCedulaEcuatoriana();
 
         UsuarioDao usuarioDao = new UsuarioDao(usuario);
+        //System.out.println("id"+usuarioDao.ultimoId());
         System.out.println("user:" + user);
         System.out.println("pass:" + password);
         RequestContext context = RequestContext.getCurrentInstance();
@@ -84,12 +86,12 @@ public class RegisterBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "el username ya existe", "el username ya existe"));
 
         } else if (usuarioDao.cedulasIguales(getCedula())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ya existe la cedula", "ya existe la cedula"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "La Cédula le pertenece a otra persona", "La Cédula le pertenece a otra persona"));
 
         } else {
             boolean estado = usuarioDao.guardarUsuario(us);
             if (estado == true) {
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Usuario y contraseña fueron guardados correctamente", user);
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados fueron guardados correctamente", user);
                 setLogeado(true);
                 DataSource dt = new DataSource();
                 dt.getEntityManager();
@@ -268,5 +270,4 @@ public class RegisterBean {
     /**
      * @return the radio
      */
-   
 }

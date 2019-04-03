@@ -5,6 +5,7 @@
     <jta-data-source>java:/jboss/datasources/ProyectPU</jta-data-source>
     <class>com.mycompany.dominio.Usuario</class>
     <class>com.mycompany.dominio.Rol</class>
+    <class>com.mycompany.dominio.Usuario_Rol</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.sharedCache.mode" value="ALL"/>

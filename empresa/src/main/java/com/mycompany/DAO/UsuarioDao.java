@@ -24,7 +24,7 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
     }
 
     public boolean verificacionLogin(String user, String pass) {
-        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.user= '" + user + "' AND u.password= '" + pass + "'");
+        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login= '" + user + "' AND u.usu_password= '" + pass + "'");
 
         if (query.getResultList().isEmpty()) {
             return false;
@@ -32,6 +32,16 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
             return true;
         }
     }
+
+//    public List<Usuario> ultimoId() {
+//        Query query = this.getEntityManager().createQuery("Select MAX(u.usu_id) from Usuario u");
+//        if(query.getResultList().isEmpty()){
+//       return null;
+//        } else{
+//            query.getL
+//        }
+//
+//    }
 
     public Usuario obtenerUsuario(String user, String pass) {
         Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login '" + user + "' AND u.usu_password= '" + pass + "'");
@@ -52,6 +62,7 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
             return true;
         }
     }
+
     public boolean cedulasIguales(String cedula) {
         Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.identificacion= '" + cedula + "'");
 

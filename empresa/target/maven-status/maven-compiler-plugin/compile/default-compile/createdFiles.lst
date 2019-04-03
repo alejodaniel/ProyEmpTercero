@@ -11,6 +11,8 @@ com\mycompany\dominio\Rol_.class
 com\mycompany\filter\AuthorizationFilter.class
 com\mycompany\ucc\Password.class
 com\mycompany\bean\AccesoBean.class
+com\mycompany\bean\ActionBean.class
 com\mycompany\DAO\ConfigXml.class
+com\mycompany\ucc\Usuarioucc.class
 com\mycompany\dominio\Rol.class
 com\mycompany\dominio\Usuario_Rol.class

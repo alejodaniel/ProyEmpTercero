@@ -46,6 +46,33 @@ public class LoginBean {
 
     }
 
+     public void login(ActionEvent action) {
+        this.getUsuario();
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        // Usuario us = new Usuario();
+        UsuarioDao ud = new UsuarioDao(null);
+        boolean estado = ud.verificacionLogin(getUser(), getPassword());
+        if (estado == true) {
+//            usuario24 = ud.;
+            ud = new UsuarioDao(null);
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", getUser());
+            System.out.println("WELCOME:  " + user);
+            setLogeado(true);
+        } else {
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "ERROR AL ACCEDER", "Credenciales incorrectos");
+            setLogeado(false);
+        }
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("estaLogeado", isLogeado());
+        if (isLogeado()) {
+            System.out.println("hola");
+            context.addCallbackParam("view", "faces/registrar.xhtml");
+        } else if (estado == false) {
+            context.addCallbackParam("view", "/index.xhtml");
+        }
+
+    }
     public List<Usuario> getUsuario() {
         UsuarioDao ud = new UsuarioDao(getUsuario24());
         usuarios = ud.buscarTodos();
@@ -103,33 +130,7 @@ public class LoginBean {
         this.logeado = logeado;
     }
 
-    public void login(ActionEvent action) {
-        this.getUsuario();
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
-        // Usuario us = new Usuario();
-        UsuarioDao ud = new UsuarioDao(null);
-        boolean estado = ud.verificacionLogin(getUser(), getPassword());
-        if (estado == true) {
-//            usuario24 = ud.;
-            ud = new UsuarioDao(null);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", getUser());
-            System.out.println("WELCOME:  " + user);
-            setLogeado(true);
-        } else {
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "ERROR AL ACCEDER", "Credenciales incorrectos");
-            setLogeado(false);
-        }
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        context.addCallbackParam("estaLogeado", isLogeado());
-        if (isLogeado()) {
-            System.out.println("hola");
-            context.addCallbackParam("view", "faces/home.xhtml");
-        } else if (estado == false) {
-            context.addCallbackParam("view", "/index.xhtml");
-        }
-
-    }
+   
 
     public String action() {
         logeado = true;

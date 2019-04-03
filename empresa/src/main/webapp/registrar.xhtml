@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"></link>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
     <h:head>
@@ -11,11 +12,11 @@
 
 
     </h:head>
-    <h:body styleClass="blue lighten-5">
+    <h:body style="background-color: lightpink">
         <p:growl id="mensaje"/>
         <div class="valign-wrapper" id="login-page">
             <div class="container">
-                <div class="center-align">
+                <div class="center-align" >
                     <div class="container">
 
                         <div class="row">
@@ -35,7 +36,7 @@
                                                         <span style="font-size: 25px; color: black;">
                                                             <i class="fas fa-user-friends"></i>
                                                         </span>
-                                                        <h:outputText value="NOMBRE" style="font-weight:bold"/> &nbsp;
+                                                        <h:outputText value="NOMBRE" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="das" value="#{registerBean.nombre}" required="true" 
                                                                      requiredMessage="Falta el username"></h:inputText> 
 
@@ -54,7 +55,7 @@
                                                         <span style="font-size: 25px; color: black;">
                                                             <i class="fas fa-user-lock"></i>
                                                         </span>
-                                                        <h:outputText value="USERNAME" style="font-weight:bold"/> &nbsp;
+                                                        <h:outputText value="USERNAME" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="user" value="#{registerBean.user}" required="true"
                                                                      requiredMessage="Falta el username"></h:inputText> 
 
@@ -63,7 +64,7 @@
                                                         <span style="font-size: 25px; color: black;"> 
                                                             <i class="fas fa-key"></i>
                                                         </span>
-                                                        <h:outputText value="CONTRASEÑA" style="font-weight:bold"/>&nbsp;
+                                                        <h:outputText value="CONTRASEÑA" style="font-weight:bold"/> &nbsp;
                                                         <h:inputSecret id="password" value="#{registerBean.password}" required="true"
                                                                        maxlength="20" style="text-transform: lowercase"
                                                                        requiredMessage="Falta la contraseña"></h:inputSecret>
@@ -73,7 +74,7 @@
                                                         <span style="font-size: 25px; color: black;"> 
                                                             <i class="fas fa-check-circle"></i>
                                                         </span>
-                                                        <h:outputText value="ESTADO" style="font-weight:bold"/>&nbsp;
+                                                        <h:outputText value="ESTADO" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="texto" style="font-weight: bold" required="true"
                                                                      disabled="true"  requiredMessage="falta el estado" value="#{registerBean.estado}"  />
                                                     </div>                                                   
@@ -100,6 +101,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+           <button onclick="location.href='http://localhost:8080/empresa-version1.0/home.xhtml'">Llévame a otro lado</button>
+
         </div>
     </h:body>
 </html>

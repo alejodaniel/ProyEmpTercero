@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"></link>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+    <h:head>
+        <title>HOME</title>
+
+
+    </h:head>
+    <h:body style="background-color: bisque">
+        <nav class="navbar  bg-dark">
+            <div class="container-fluid" style="color: white;">
+                <div class="navbar-header">
+
+                    <a class="navbar-brand">REGISTRO DE PERSONAS</a>
+                </div>
+                <ul class="nav navbar-nav text-right">
+                    <li>
+                        <a onclick="#{accesoBean.username}" >
+                            <i class="fas fa-times-circle"></i>
+                            Cerrar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+
+
+
+
+        <div class="card border-dark">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-7">
+                        © 2018 INSTITUTO SUPERIOR YAVIRAC. Todos los derechos reservados.
+                    </div>
+                    <div class="col-5">
+
+                        <div class="redes-footer" ALIGN="left">
+                            ENCUENTRANOS EN LAS REDES:
+                            <a href="https://www.propiedadintelectual.gob.ec/">
+                                <h:graphicImage library="images" name="iepi.png" style="max-width: 30px"> </h:graphicImage>
+
+                            </a>
+                            <a href="https://www.facebook.com/SENADI.Ecuador/?eid=ARDOsIcfAm_CTjb_XWd7m9hvUw2E6UVplbym8Fap-iBb9ARzk0Gpk4zFAXT8G66XdYnUFTCBJYInXcS7">
+                                <h:graphicImage library="images" name="facebook.png" style="max-width: 30px"> </h:graphicImage>
+                            </a>
+                            <a href="https://www.youtube.com/user/IEPIEcuador">
+
+                                <h:graphicImage library="images" name="yputube.jpg" style="max-width: 30px"> </h:graphicImage>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

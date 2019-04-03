@@ -22,14 +22,13 @@ import javax.persistence.Table;
 public class Usuario_Rol implements Serializable {
 
     @Id
+    @Column(name = "usrol_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int usrol_id;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int usrol_idusuario;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int usrol_idrol;
+    @Column(name = "usrol_idUsuario", nullable = false, columnDefinition = "int(11)")
+    private int usrol_idUsuario;
+    @Column(name = "usrol_idRol",nullable = false,columnDefinition = "int(11)")
+    private int usrol_idRol;
 
     /**
      * @return the usrol_id
@@ -46,31 +45,31 @@ public class Usuario_Rol implements Serializable {
     }
 
     /**
-     * @return the usrol_idusuario
+     * @return the usrol_idUsuario
      */
-    public int getUsrol_idusuario() {
-        return usrol_idusuario;
+    public int getUsrol_idUsuario() {
+        return usrol_idUsuario;
     }
 
     /**
-     * @param usrol_idusuario the usrol_idusuario to set
+     * @param usrol_idUsuario the usrol_idUsuario to set
      */
-    public void setUsrol_idusuario(int usrol_idusuario) {
-        this.usrol_idusuario = usrol_idusuario;
+    public void setUsrol_idUsuario(int usrol_idUsuario) {
+        this.usrol_idUsuario = usrol_idUsuario;
     }
 
     /**
-     * @return the usrol_idrol
+     * @return the usrol_idRol
      */
-    public int getUsrol_idrol() {
-        return usrol_idrol;
+    public int getUsrol_idRol() {
+        return usrol_idRol;
     }
 
     /**
-     * @param usrol_idrol the usrol_idrol to set
+     * @param usrol_idRol the usrol_idRol to set
      */
-    public void setUsrol_idrol(int usrol_idrol) {
-        this.usrol_idrol = usrol_idrol;
+    public void setUsrol_idRol(int usrol_idRol) {
+        this.usrol_idRol = usrol_idRol;
     }
 
 }

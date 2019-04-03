@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -19,20 +20,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario")
+@SequenceGenerator(name = "EmployeSeq",sequenceName = "EMPLOYEES_SEQ",initialValue = 1,allocationSize = 10 )
 public class Usuario implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "EmployeSeq")
+    @Column(name = "usu_id")
     private int usu_id;
-    @Column(nullable = false, columnDefinition = "varchar(30)")
+    @Column(name = "usu_nombre", nullable = false, columnDefinition = "varchar(30)")
     private String usu_nombre;
-    @Column(nullable = false, columnDefinition = "varchar(30)")
+    @Column(name = "usu_login", nullable = false, columnDefinition = "varchar(30)")
     private String usu_login;
-    @Column(nullable = false, columnDefinition = "varchar(50)")
+    @Column(name = "usu_password", nullable = false, columnDefinition = "varchar(50)")
     private String usu_password;
-    @Column(nullable = false, columnDefinition = "varchar(15)")
+    @Column(name = "estado", nullable = false, columnDefinition = "varchar(15)")
     private String estado;
-    @Column(nullable = false, columnDefinition = "varchar(15)")
+    @Column(name = "identificacion", nullable = false, columnDefinition = "varchar(15)")
     private String identificacion;
 
     /**
@@ -118,8 +121,5 @@ public class Usuario implements Serializable {
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
-   
- 
 
-    
 }
