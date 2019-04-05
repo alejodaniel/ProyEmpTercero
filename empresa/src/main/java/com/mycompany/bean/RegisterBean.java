@@ -7,9 +7,12 @@ package com.mycompany.bean;
 
 import com.mycompany.DAO.DataSource;
 import com.mycompany.DAO.UsuarioDao;
+import com.mycompany.DAO.Usuario_RolDao;
 import com.mycompany.dominio.Usuario;
+import com.mycompany.dominio.Usuario_Rol;
 import com.mycompany.ucc.Password;
 import static com.mycompany.ucc.Password.getMD5;
+import com.mycompany.ucc.Usuario_Rolucc;
 import com.mycompany.ucc.ValidarCedulaEcuatoriana;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ public class RegisterBean {
     private List<Usuario> usuarios = null;
     private List<String> lista = new ArrayList<String>();
     private String md5;
+    //private int rol = 7;
 
     public RegisterBean() {
 //        DataSource.getEntityManager();
@@ -57,7 +61,7 @@ public class RegisterBean {
     }
 
     public void register(ActionEvent action) {
-       
+
         ValidarCedulaEcuatoriana vce = new ValidarCedulaEcuatoriana();
 
         UsuarioDao usuarioDao = new UsuarioDao(usuario);
@@ -72,6 +76,7 @@ public class RegisterBean {
         us.setUsu_password(md5);
         System.out.println(getMD5(getPassword()));
 
+        //------------------------------------------
         us.setUsu_nombre(getNombre());
         us.setIdentificacion(getCedula());
         us.setEstado(getEstado());
@@ -91,7 +96,21 @@ public class RegisterBean {
         } else {
             boolean estado = usuarioDao.guardarUsuario(us);
             if (estado == true) {
+
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados fueron guardados correctamente", user);
+                // usuarioDao.getUsuarioById(rol)
+                usuarioDao = new UsuarioDao(null);
+                //Aqui se asigna la relacion 
+                Usuario u = usuarioDao.getUser(us.getUsu_login());
+                System.out.println("" + u.getUsu_id());
+                Usuario_Rol ur = new Usuario_Rol();
+                ur.setUsrol_id(2);
+                ur.setUsrol_idUsuario(u.getUsu_id());
+                ur.setUsrol_idRol(7);
+                Usuario_RolDao urd = new Usuario_RolDao(ur);
+                urd.persist();
+
+                //System.out.println("el user es: " + usuarioDao.getUser(getUser()));
                 setLogeado(true);
                 DataSource dt = new DataSource();
                 dt.getEntityManager();
@@ -131,45 +150,6 @@ public class RegisterBean {
      */
     public void setLogeado(boolean logeado) {
         this.logeado = logeado;
-    }
-
-    public void newUser(ActionEvent action) {
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
-
-        UsuarioDao usuarioDao = new UsuarioDao(usuario);
-        if (usuario != null) {
-            usuario.setUsu_login(user);
-            usuario.setUsu_password(password);
-            boolean estado = usuarioDao.editarUsuario(usuario);
-            if (estado == true) {
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario se edito correctamente", user);
-            } else {
-                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se editaron los datos", null);
-            }
-        } else {
-            Usuario us = new Usuario();
-            us.setUsu_login(getUser());
-            us.setUsu_password(getPassword());
-
-            boolean estado = usuarioDao.guardarUsuario(us);
-            if (estado == true) {
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Usuario y contraseña fueron guardados correctamente", user);
-                setLogeado(true);
-            } else {
-                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se guardaron los datos ingresados", null);
-                setLogeado(false);
-            }
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            context.addCallbackParam("estaLogeado", isLogeado());
-            if (isLogeado()) {
-                context.addCallbackParam("view", "home.xhtml");
-            } else if (estado == false) {
-                context.addCallbackParam("view", "index.xhtml");
-            }
-
-        }
-
     }
 
     /**
@@ -267,6 +247,19 @@ public class RegisterBean {
         this.md5 = md5;
     }
 
+    /**
+     * @return the rol
+     */
+//    public int getRol() {
+//        return rol;
+//    }
+//
+//    /**
+//     * @param rol the rol to set
+//     */
+//    public void setRol(int rol) {
+//        this.rol = rol;
+//    }
     /**
      * @return the radio
      */

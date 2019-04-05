@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
+
 public class UsuarioDao extends DAOAbstract<Usuario> {
 
     public UsuarioDao(Usuario usuario) {
@@ -42,6 +43,11 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
 //        }
 //
 //    }
+    
+    public Usuario getUser(String user) {
+        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login= '" + user + "'");
+        return (Usuario) query.getSingleResult();
+    }
 
     public Usuario obtenerUsuario(String user, String pass) {
         Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login '" + user + "' AND u.usu_password= '" + pass + "'");
@@ -91,6 +97,7 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
         } catch (Exception e) {
             return false;
         }
+
     }
 
     public boolean insertarAdmin() {

@@ -1,10 +1,12 @@
 com\mycompany\bean\LoginBean.class
 com\mycompany\DAO\DataSource.class
 com\mycompany\DAO\DAOAbstract.class
+com\mycompany\ucc\Usuario_Rolucc.class
 com\mycompany\dominio\Usuario_Rol_.class
 com\mycompany\DAO\UsuarioDao.class
 com\mycompany\dominio\Usuario.class
 com\mycompany\ucc\ValidarCedulaEcuatoriana.class
+com\mycompany\DAO\Usuario_RolDao.class
 com\mycompany\dominio\Usuario_.class
 com\mycompany\bean\RegisterBean.class
 com\mycompany\dominio\Rol_.class
