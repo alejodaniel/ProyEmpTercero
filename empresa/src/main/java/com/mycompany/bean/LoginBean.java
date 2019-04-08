@@ -66,10 +66,10 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("estaLogeado", isLogeado());
         if (isLogeado()) {
-            System.out.println("hola");
-            context.addCallbackParam("view", "faces/registrar.xhtml");
+            System.out.println("accedio al sistema");
+            context.addCallbackParam("view", "faces/home.xhtml");
         } else if (estado == false) {
-            context.addCallbackParam("view", "/index.xhtml");
+            context.addCallbackParam("view", "/login.xhtml");
         }
 
     }

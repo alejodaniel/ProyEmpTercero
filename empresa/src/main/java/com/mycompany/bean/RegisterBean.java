@@ -100,11 +100,12 @@ public class RegisterBean {
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados fueron guardados correctamente", user);
                 // usuarioDao.getUsuarioById(rol)
                 usuarioDao = new UsuarioDao(null);
-                //Aqui se asigna la relacion 
+                //Aqui se asigna la relacion de usuario y el rol  
                 Usuario u = usuarioDao.getUser(us.getUsu_login());
                 System.out.println("" + u.getUsu_id());
                 Usuario_Rol ur = new Usuario_Rol();
-                ur.setUsrol_id(2);
+           
+                ur.setUsrol_id(0);
                 ur.setUsrol_idUsuario(u.getUsu_id());
                 ur.setUsrol_idRol(7);
                 Usuario_RolDao urd = new Usuario_RolDao(ur);

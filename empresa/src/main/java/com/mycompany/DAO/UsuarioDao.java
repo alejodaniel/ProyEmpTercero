@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
-
 public class UsuarioDao extends DAOAbstract<Usuario> {
 
     public UsuarioDao(Usuario usuario) {
@@ -33,17 +32,14 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
             return true;
         }
     }
+  
 
-//    public List<Usuario> ultimoId() {
-//        Query query = this.getEntityManager().createQuery("Select MAX(u.usu_id) from Usuario u");
-//        if(query.getResultList().isEmpty()){
-//       return null;
-//        } else{
-//            query.getL
-//        }
-//
-//    }
-    
+    public List<Usuario> ultimoIdUserRol() {
+        Query query = this.getEntityManager().createQuery("Select MAX(u.usu_id) from Usuario u");
+        return query.getResultList();
+           
+    }
+
     public Usuario getUser(String user) {
         Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login= '" + user + "'");
         return (Usuario) query.getSingleResult();

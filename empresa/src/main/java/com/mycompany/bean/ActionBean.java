@@ -9,6 +9,7 @@ import com.mycompany.DAO.DataSource;
 import com.mycompany.DAO.UsuarioDao;
 import com.mycompany.dominio.Usuario;
 import com.mycompany.ucc.Usuarioucc;
+import com.mycompany.util.SessionUtils;
 //import com.mycompany.ucc.Usuarioucc;
 //import com.mycompany.util.SessionUtils;
 import java.util.ArrayList;
@@ -42,12 +43,12 @@ public class ActionBean {
     private UIData datosObtenidos;
 
     public ActionBean() {
-        System.out.println("6h52562o65mea///////////////");
+        System.out.println("otro bean");
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         LoginBean lv = (LoginBean) session.getAttribute("loginBean");
         user = lv.getUser();
         usuarios = lv.getUsuarios();
-        System.out.println("dasaa464++++++++++++++++++");
+        System.out.println("obtener el otro login beam");
     }
 
 //    public void obtener(ActionEvent event){
@@ -128,11 +129,11 @@ public class ActionBean {
 
     }
 
-//    public String logout() {
-//        HttpSession session = SessionUtils.getSession();
-//        session.invalidate();
-//        return "index";
-//    }
+    public String logout() {
+        HttpSession session = SessionUtils.getSession();
+        session.invalidate();
+        return "login";
+    }
 
     public static List<Usuario> getLista() {
         return lista;

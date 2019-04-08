@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -19,15 +20,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario_rol")
+@SequenceGenerator(name = "EmployeSeq", sequenceName = "EMPLOYEES_SEQ", initialValue = 1, allocationSize = 10)
+
 public class Usuario_Rol implements Serializable {
 
     @Id
     @Column(name = "usrol_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "EmployeSeq")
     private int usrol_id;
     @Column(name = "usrol_idUsuario", nullable = false, columnDefinition = "int(11)")
     private int usrol_idUsuario;
-    @Column(name = "usrol_idRol",nullable = false,columnDefinition = "int(11)")
+    @Column(name = "usrol_idRol", nullable = false, columnDefinition = "int(11)")
     private int usrol_idRol;
 
     /**
