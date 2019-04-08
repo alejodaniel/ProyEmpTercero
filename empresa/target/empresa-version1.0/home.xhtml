@@ -13,20 +13,16 @@
         <nav class="navbar  bg-warning">
             <div class="container-fluid" style="color: white;">
                 <div class="navbar-header">
-
-                    <span style="font-size: 30px; color: black;">
-                        <i class="fas fa-user"></i>
-                         <a class="navbar-brand">BIENVENIDO@: #{actionBean.user}</a>                     
-                 
-                    </span>
-                   
-
+                    <div align="center">
+                        <h:graphicImage library="images" name="iepi.png" style="max-width: 50px"></h:graphicImage> 
+                        <a class="navbar-brand" style="color: blue">SERVICIO NACIONAL DE LOS DERECHOS INTELECTUALES</a>   
+                    </div>
                 </div>
                 <ul class="nav navbar-nav text-right">
                     <h:form>
                         <span style="font-size: 30px; color: black;">
                             <i class="fas fa-sign-out-alt"></i>
-                            <h:commandLink action="#{actionBean.logout()}" style="color: red" value="CERRAR SESION"></h:commandLink>
+                            <h:commandLink action="#{actionBean.logout()}" style="color: red; font-size: 20px" value="CERRAR SESION"></h:commandLink>
                         </span>
 
 
@@ -34,26 +30,106 @@
                 </ul>
             </div>
         </nav>
+        <h:form>    
+            <span style="font-size: 30px; color: black;">
+                <i class="fas fa-home"></i>
+            </span>
+            <p:commandButton value="ACCESOS" style="background: bisque;font-family: initial; color:blue " oncomplete="PF('sidebar1').show()" /> 
+
+        </h:form>
+
+
+        <h:form>
+            <p:sidebar widgetVar="sidebar1" baseZIndex="10000" style="background: bisque">
+                <div>
+                    <span style="font-size: 30px; color: black;">
+                        <i class="fas fa-user"></i>
+                        <a class="navbar-brand">BIENVENIDO@: #{actionBean.user}</a>                     
+                    </span> 
+                </div>
+                <div align="center">
+                    <h:graphicImage library="images" name="iepi.png" style="max-width: 120px"></h:graphicImage> 
+                </div>
 
 
 
-        hgflmfwellsdgnfjkgnfjkdgndfjknhhkgtrmhjgmjklfd
-        sxe
-        wr
-        detrpeykpgokpxñrlopek.fytyiouñpx.jitpex
-        optkerptyer
-        xdrwkt
-        ´xroptjoe.pt
-        edqxopkeopitgjropjytoutrukpyrkñbt
-        rwexkñtr9gkopgkñerpcgkñrjoeryipjpfjyp
-        dopsakctiojker
-        dslpakdfslgdfilgñdf
-        dgkfopdhkgfohkgfop
-        ldfsdopgkopghopdpsofkpsofksdpfkdfophkgfopk
-        opgfdjkgopfjgopfjdpofksdpfsd
-        dasokdaspdoksadasdasgdfmhd
-        fklsdjfklgndfkgn
-        gldfkgmlñdfgmdfkl
+                <div>
+                    <span style="font-size: 30px; color: black;">
+                        <i class="fas fa-users"></i>&nbsp;
+                        <a href="registrar.xhtml" title="Mi enlace" style="color: blue">NUEVO USER</a>
+                    </span>
+                </div>
+
+                <div>
+                    <span style="font-size: 30px; color: black;">
+                        <i class="fas fa-user"></i>&nbsp;
+                        <a href="asignaciones.xhtml" title="Mi enlace" style="color: blue">ASIGNACIONES</a>
+                    </span>
+                </div>
+                <div>
+                    <h:form>
+                        <span style="font-size: 30px; color: black;">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;
+                            <h:commandLink action="#{actionBean.logout()}" style="color: red;font-size: 20px" value="CERRAR SESION"></h:commandLink>
+                        </span>
+                    </h:form> 
+                </div>
+
+
+            </p:sidebar>  
+
+        </h:form>
+
+        <p:growl autoUpdate="true" showDetail="true" showSummary="false"/>
+        <h:form id="frmPrincipal">
+            <div align="center">
+                <h1>LISTA DE PERSONAS REGISTRADAS</h1> 
+                <!-- <span style="font-size: 100px; color: Dodgerblue;">
+                     <i class="fas fa-user-secret "></i>
+                 </span><br/>-->
+
+                <p:panel id="lista" header="Usuarios" style="margin-bottom: 10px; width: 900px; height: 900px" >
+                    <p:dataTable id="tabla" emptyMessage="No hay registros"
+                                 rows="11"
+                                 paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                                 binding="#{actionBean.datosObtenidos}"
+                                 value="#{actionBean.usuarios}" var="us" editable="true" >
+
+                        <p:column headerText="Nombre" filterBy="#{us.usu_nombre}" filterMatchMode="contains">
+                            <h:outputText value="#{us.usu_nombre}"/>
+                        </p:column>
+                        <p:column headerText="Identificacion">
+                            <h:outputText value="#{us.identificacion}"/>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{us.estado}"/>
+                        </p:column>
+
+
+                        <p:column headerText="Eliminar">
+                            <p:commandButton value="Eliminar"     
+                                             actionListener="#{actionBean.eliminar}" update="tabla" icon="ui-icon-trahs">
+                                <p:confirm message="Seguro que deseas eliminar al Usuario: #{us.usu_login}?" header="Aviso" icon="ui-icon-alert"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Edit Contraseña">
+                            <p:commandLink >
+                                <h:graphicImage library="images" name="edit3.jpg" style="max-width: 50px"/>
+                            </p:commandLink>
+                        </p:column> 
+
+
+                    </p:dataTable>
+                </p:panel>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="tabla"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" update="tabla"/>
+            </p:confirmDialog>
+        </h:form>
+
         <div class="card border-dark">
 
             <div class="container">

@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import org.primefaces.component.api.UIData;
+import static org.primefaces.component.focus.Focus.PropertyKeys.context;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -51,13 +52,6 @@ public class ActionBean {
         System.out.println("obtener el otro login beam");
     }
 
-//    public void obtener(ActionEvent event){
-//        UIData data = (UIData) event.getComponent().findComponent("lista");
-//        ActionBean ab = (ActionBean) data.getRowData();
-//        int rowIndex = data.getRowIndex();
-//        
-//        
-//    }
     public List<Usuario> getUsuario() {
         UsuarioDao ud = new UsuarioDao(usuarioBase);
         usuarios = ud.buscarTodos();
@@ -66,20 +60,25 @@ public class ActionBean {
     }
 
     public void modificar(Usuario us) {
-//        System.out.println("El Usuario :" + us + "fue editado correctamente");
-//        Usuarioucc ucc = new Usuarioucc();
-//        ucc.editarUsuario(us);
-//
-     
 
-        Usuario u = (Usuario) datosObtenidos.getRowData();
-        System.out.println("se ha elegido para editar" + u.getUsu_login()+ u.getUsu_password());
-        Usuarioucc ucc = new Usuarioucc();
-        if (ucc.editarUsuario(u) == true) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se edito correctamente"));
+       UsuarioDao udd = new UsuarioDao(null);
+        if (udd.editarUsuario(us) == true) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se edito correctamente", "Se edito correctamente"));
+            System.out.println("El Usuario :" + us + "fue editado correctamente");
+            getUsuario();
+            
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "No se edito"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "No se edito", "No se edito"));
         }
+
+//        Usuario u = (Usuario) datosObtenidos.getRowData();
+//        System.out.println("se ha elegido para editar" + u.getUsu_login()+ u.getUsu_password());
+//        Usuarioucc ucc = new Usuarioucc();
+//        if (ucc.editarUsuario(u) == true) {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se edito correctamente"));
+//        } else {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "No se edito"));
+//        }
     }
 
     public void eliminar(ActionEvent event) {
@@ -95,44 +94,15 @@ public class ActionBean {
 
     }
 
-    public void register(ActionEvent action) {
-        UsuarioDao usuarioDao = new UsuarioDao(usuarioBase);
-        System.out.println("user:" + user);
-        System.out.println("pass:" + password);
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
-        Usuario us = new Usuario();
-        //us.setUser(getUser());
-        //us.setPassword(getPassword());
-        us.getUsu_login();
-        us.getUsu_password();
-
-        boolean estado = usuarioDao.guardarUsuario(us);
-        if (estado == true) {
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Usuario y contraseña fueron guardados correctamente", user);
-            setLogeado(true);
-            getUsuario();
-            //DataSource dt = new DataSource();
-            //dt.getEntityManager();
-
-        } else {
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se guardaron los datos ingresados", null);
-            setLogeado(false);
-        }
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        context.addCallbackParam("estaLogeado", isLogeado());
-        if (isLogeado()) {
-            context.addCallbackParam("view", "index.xhtml");
-        } else if (estado == false) {
-            context.addCallbackParam("view", "home.xhtml");
-        }
-
-    }
-
     public String logout() {
         HttpSession session = SessionUtils.getSession();
         session.invalidate();
         return "login";
+    }
+    
+    public void vinculo(){
+          RequestContext context = RequestContext.getCurrentInstance();
+          context.addCallbackParam("view", "faces/registrar.xhtml");
     }
 
     public static List<Usuario> getLista() {
