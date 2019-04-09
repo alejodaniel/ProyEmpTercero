@@ -25,5 +25,11 @@ public class RolDao extends DAOAbstract<Rol> {
         return query.getResultList();
 
     }
+    public boolean pertenece(){
+          Query query = this.getEntityManager().createQuery("Select r from Rol r");
+        return false;
+      
+
+    }
 
 }

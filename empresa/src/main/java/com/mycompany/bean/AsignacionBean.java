@@ -19,6 +19,7 @@ import org.primefaces.context.RequestContext;
 public class AsignacionBean {
 
     private Usuario usuario;
+    private String password;
 
     private List<Rol> roles = null;
     private UIData obtenerDatos;
@@ -31,6 +32,17 @@ public class AsignacionBean {
         loginBean = getLoginBean();
         usuario = loginBean.getUsuarioFlotante();
 
+    }
+
+    public void pass() {
+        UsuarioDao ud = new UsuarioDao(usuario);
+        boolean estado = ud.verificacionPassword(getPassword());
+        if (estado == true) {
+            System.out.println("correcto");
+
+        } else {
+            System.out.println("incorrecto");
+        }
     }
 
     public LoginBean getLoginBean() {
@@ -75,7 +87,6 @@ public class AsignacionBean {
                 roles.get(i).setAsignado(true);
             }
         }
-
         System.out.println("Array de roles: " + roles);
         return roles;
     }
@@ -92,6 +103,20 @@ public class AsignacionBean {
      */
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

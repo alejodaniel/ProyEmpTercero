@@ -13,10 +13,31 @@
     </h:head>
     <h:body style="background: bisque">
         <p:growl id="mensaje"/>
-        <h1>ASIGNACIONES</h1>
+        <nav class="navbar  bg-warning">
+            <div class="container-fluid" style="color: white;">
+                <div class="navbar-header">
+                    <div align="center">
+                        <h:graphicImage library="images" name="iepi.png" style="max-width: 50px"></h:graphicImage> 
+                        <a class="navbar-brand" style="color: blue">SERVICIO NACIONAL DE LOS DERECHOS INTELECTUALES</a>   
+                    </div>
+                </div>
+                <ul class="nav navbar-nav text-right">
+                    <h:form>
+                        <span style="font-size: 30px; color: black;">
+                            <i class="fas fa-reply"></i>
+                            <h:commandLink action="faces/home.xhtml" style="color: red; font-size: 20px" value="REGRESAR"></h:commandLink>
+                        </span>
+
+
+                    </h:form>
+                </ul>
+            </div>
+        </nav>
+        <h1 align="center">ASIGNACIONES</h1>
+
         <div align="center">
             <p:panel id="lista" header="DATOS PERSONALES" 
-                     style="margin-bottom: 500px; width: 950px; height: 1000px;">
+                     style="margin-bottom: 500px; width: 950px; height: 1050px;">
                 <h:form>                   
 
                     <div class="row">
@@ -39,11 +60,17 @@
                             <input type="text" class="form-control" value="#{asignacionBean.usuario.usu_login}" disabled="false"></input>
 
                         </div>
-                    </div>
-                    <br/>
-                    <br/>
+                    </div>                            
+                    <br/>                   
+                    <h:form>    
+                        <span style="font-size: 30px; color: black;">
+                            <i class="fas fa-lock-open"></i>
+                        </span>
+                        <p:commandButton value="CAMBIAR CONTRASEÑA" action="#{asignacionBean.pass}"/> 
 
-                    <h1>ASIGNACIÓN DE ROLES</h1>
+                    </h:form>   
+                    <br/>
+                    <h1 style="color: blue">ASIGNACIÓN DE ROLES</h1>
                     <p:dataTable id="tabla" emptyMessage="No hay registros"
                                  rows="11"                                                                      
                                  value="#{asignacionBean.roles}" var="rol" editable="true" >
@@ -55,14 +82,8 @@
                             <h:outputText value="#{rol.descripcion}"/>
                         </p:column>
                         <p:column headerText="Roles">
-                           
+
                         </p:column>
-
-
-
-
-
-
                     </p:dataTable>
                 </h:form>
             </p:panel>

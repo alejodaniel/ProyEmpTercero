@@ -68,7 +68,7 @@ public class ActionBean {
         
         RequestContext context = RequestContext.getCurrentInstance();
           System.out.println("paso al siguiente nivel" + context);
-        context.addCallbackParam("view", "faces/asignaciones.xhtml");
+        context.addCallbackParam("view", "asignaciones.xhtml");
          System.out.println("fin de llegada" + loginBean);
 
     }

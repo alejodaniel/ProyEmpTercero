@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -40,6 +41,8 @@ public class Rol implements Serializable {
     
     
     public boolean pertenece(Usuario usuario){
+        
+       
         return false;
         
     }

@@ -18,6 +18,16 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
 
     }
 
+    public boolean verificacionPassword(String pass) {
+        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_password=" + pass);
+
+        if (query.getResultList().isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public Usuario getUsuarioById(int idUsuario) {
         Query query = this.getEntityManager().createQuery("Select u from Usuario u where p.idUsuario=" + idUsuario);
         return (Usuario) query.getSingleResult();
@@ -32,12 +42,11 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
             return true;
         }
     }
-  
 
     public List<Usuario> ultimoIdUserRol() {
         Query query = this.getEntityManager().createQuery("Select MAX(u.usu_id) from Usuario u");
         return query.getResultList();
-           
+
     }
 
     public Usuario getUser(String user) {
