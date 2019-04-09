@@ -39,6 +39,7 @@ public class LoginBean {
     private boolean logeado = false;
     private List<Usuario> usuarios = null;
     private Usuario usuario24;
+    private Usuario usuarioFlotante;
     private static List<Usuario> lista = new ArrayList();
 
     public LoginBean() {
@@ -192,6 +193,20 @@ public class LoginBean {
      */
     public void setUsuario24(Usuario usuario24) {
         this.usuario24 = usuario24;
+    }
+
+    /**
+     * @return the usuarioFlotante
+     */
+    public Usuario getUsuarioFlotante() {
+        return usuarioFlotante;
+    }
+
+    /**
+     * @param usuarioFlotante the usuarioFlotante to set
+     */
+    public void setUsuarioFlotante(Usuario usuarioFlotante) {
+        this.usuarioFlotante = usuarioFlotante;
     }
 
     /**

@@ -91,8 +91,8 @@
                 <p:panel id="lista" header="Usuarios" style="margin-bottom: 10px; width: 900px; height: 900px" >
                     <p:dataTable id="tabla" emptyMessage="No hay registros"
                                  rows="11"
-                                 paginator="true"
-                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                                 paginator="true"                                 
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"                                  
                                  binding="#{actionBean.datosObtenidos}"
                                  value="#{actionBean.usuarios}" var="us" editable="true" >
 
@@ -113,9 +113,14 @@
                                 <p:confirm message="Seguro que deseas eliminar al Usuario: #{us.usu_login}?" header="Aviso" icon="ui-icon-alert"/>
                             </p:commandButton>
                         </p:column>
-                        <p:column headerText="Edit Contraseña">
+                        <p:column headerText="Asignar Roles ">
                             <p:commandLink >
-                                <h:graphicImage library="images" name="edit3.jpg" style="max-width: 50px"/>
+                                <p:commandButton value="asignar"     
+                                                 actionListener="#{actionBean.obtenerUserAsignaciones}" update="tabla" icon="ui-icon-trahs"
+                                                 oncomplete="manejarLogin(xhr, status, args)">
+                                   
+                                </p:commandButton>
+                              
                             </p:commandLink>
                         </p:column> 
 
@@ -158,4 +163,19 @@
             </div>
         </div>
     </h:body>
+    <script>
+        //<![CDATA[
+        function manejarLogin(xhr, status, args) {
+            //if (args.estaLogeado) {
+                console.log(args);
+                console.log(xhr);
+                console.log(status);
+
+                setTimeout(function () {
+                    window.location = args.view;
+                }, 500);
+            //}
+        }
+        //]]>
+    </script>
 </html>

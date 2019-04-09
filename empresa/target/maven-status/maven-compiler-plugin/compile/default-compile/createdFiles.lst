@@ -6,6 +6,7 @@ com\mycompany\dominio\Usuario_Rol_.class
 com\mycompany\DAO\UsuarioDao.class
 com\mycompany\dominio\Usuario.class
 com\mycompany\ucc\ValidarCedulaEcuatoriana.class
+com\mycompany\bean\AsignacionBean.class
 com\mycompany\DAO\Usuario_RolDao.class
 com\mycompany\dominio\Usuario_.class
 com\mycompany\bean\RegisterBean.class
@@ -13,6 +14,7 @@ com\mycompany\dominio\Rol_.class
 com\mycompany\filter\AuthorizationFilter.class
 com\mycompany\ucc\Password.class
 com\mycompany\bean\AccesoBean.class
+com\mycompany\DAO\RolDao.class
 com\mycompany\bean\ActionBean.class
 com\mycompany\DAO\ConfigXml.class
 com\mycompany\ucc\Usuarioucc.class

@@ -39,21 +39,42 @@ public class ActionBean {
     private String password;
     private boolean logeado = false;
     private List<Usuario> usuarios = null;
-    private Usuario usuarioBase;
+    private Usuario usuario;
     private static List<Usuario> lista = new ArrayList();
     private UIData datosObtenidos;
+    private LoginBean loginBean;
 
     public ActionBean() {
-        System.out.println("otro bean");
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        LoginBean lv = (LoginBean) session.getAttribute("loginBean");
-        user = lv.getUser();
-        usuarios = lv.getUsuarios();
+        System.out.println("otro bean");    
+        loginBean = getLoginBean();
+        user = loginBean.getUser();
+        usuarios = loginBean.getUsuarios();
         System.out.println("obtener el otro login beam");
+
+        usuario = loginBean.getUsuario24();
+    }
+
+    public LoginBean getLoginBean() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        LoginBean lb = (LoginBean) session.getAttribute("loginBean");
+        return lb;
+    }
+
+    public void obtenerUserAsignaciones(ActionEvent event) {
+        Usuario u = (Usuario) datosObtenidos.getRowData();
+        System.out.println("se ha seleccionado la tabla para asignar rol: " + u.getUsu_login());
+        //LoginBean lb = new LoginBean();
+        loginBean.setUsuarioFlotante(u);
+        
+        RequestContext context = RequestContext.getCurrentInstance();
+          System.out.println("paso al siguiente nivel" + context);
+        context.addCallbackParam("view", "faces/asignaciones.xhtml");
+         System.out.println("fin de llegada" + loginBean);
+
     }
 
     public List<Usuario> getUsuario() {
-        UsuarioDao ud = new UsuarioDao(usuarioBase);
+        UsuarioDao ud = new UsuarioDao(usuario);
         usuarios = ud.buscarTodos();
         System.out.println("Array de Usuarios:" + usuarios);
         return usuarios;
@@ -61,12 +82,12 @@ public class ActionBean {
 
     public void modificar(Usuario us) {
 
-       UsuarioDao udd = new UsuarioDao(null);
+        UsuarioDao udd = new UsuarioDao(null);
         if (udd.editarUsuario(us) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se edito correctamente", "Se edito correctamente"));
             System.out.println("El Usuario :" + us + "fue editado correctamente");
             getUsuario();
-            
+
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "No se edito", "No se edito"));
         }
@@ -98,11 +119,6 @@ public class ActionBean {
         HttpSession session = SessionUtils.getSession();
         session.invalidate();
         return "login";
-    }
-    
-    public void vinculo(){
-          RequestContext context = RequestContext.getCurrentInstance();
-          context.addCallbackParam("view", "faces/registrar.xhtml");
     }
 
     public static List<Usuario> getLista() {
@@ -151,7 +167,7 @@ public class ActionBean {
     }
 
     public void leer(Usuario usuario) {
-        usuarioBase = usuario;
+        usuario = usuario;
         this.setAccion("M");
 
     }

@@ -1,6 +1,7 @@
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\ucc\ValidarCedulaEcuatoriana.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\bean\LoginBean.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\DAO\UsuarioDao.java
+C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\bean\AsignacionBean.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\DAO\Usuario_RolDao.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\DAO\ConfigXml.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\ucc\Usuarioucc.java
@@ -11,6 +12,7 @@ C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\util
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\bean\AccesoBean.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\dominio\Usuario.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\ucc\Usuario_Rolucc.java
+C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\DAO\RolDao.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\dominio\Usuario_Rol.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\ucc\Password.java
 C:\Users\Iepiadm\Desktop\ProyEmpTercero\empresa\src\main\java\com\mycompany\bean\ActionBean.java

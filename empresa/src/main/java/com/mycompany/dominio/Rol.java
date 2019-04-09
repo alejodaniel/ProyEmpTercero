@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -34,74 +35,74 @@ public class Rol implements Serializable {
     @Column(name = "link", nullable = false, columnDefinition = "varchar(100)")
     private String link;
 
-    /**
-     * @return the rol_codigo
-     */
+    @Transient  
+    private boolean asignado;
+    
+    
+    public boolean pertenece(Usuario usuario){
+        return false;
+        
+    }
+    
     public int getRol_codigo() {
         return rol_codigo;
     }
 
-    /**
-     * @param rol_codigo the rol_codigo to set
-     */
     public void setRol_codigo(int rol_codigo) {
         this.rol_codigo = rol_codigo;
     }
 
-    /**
-     * @return the rol_nombre
-     */
+    
     public String getRol_nombre() {
         return rol_nombre;
     }
 
-    /**
-     * @param rol_nombre the rol_nombre to set
-     */
     public void setRol_nombre(String rol_nombre) {
         this.rol_nombre = rol_nombre;
     }
 
-    /**
-     * @return the rol_id
-     */
+   
     public String getRol_id() {
         return rol_id;
     }
 
-    /**
-     * @param rol_id the rol_id to set
-     */
+    
     public void setRol_id(String rol_id) {
         this.rol_id = rol_id;
     }
 
-    /**
-     * @return the descripcion
-     */
+    
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * @param descripcion the descripcion to set
-     */
+    
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * @return the link
-     */
+    
     public String getLink() {
         return link;
     }
 
-    /**
-     * @param link the link to set
-     */
+   
     public void setLink(String link) {
         this.link = link;
+    }
+
+    /**
+     * @return the asignado
+     */
+    public boolean isAsignado() {
+        return asignado;
+    }
+
+    /**
+     * @param asignado the asignado to set
+     */
+    public void setAsignado(boolean asignado) {
+        this.asignado = asignado;
     }
 
 }

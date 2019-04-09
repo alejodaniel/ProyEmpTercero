@@ -49,6 +49,7 @@
                                                         <h:outputText value="NOMBRE" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="das" value="#{registerBean.nombre}" required="true" 
                                                                      requiredMessage="Falta el username"></h:inputText> 
+                                                          <p:watermark for="das" value="Nombre Apellido" />
 
                                                     </div>                                                   
                                                     <div class="form-group col-md-8">
@@ -67,7 +68,8 @@
                                                         </span>
                                                         <h:outputText value="USERNAME" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="user" value="#{registerBean.user}" required="true"
-                                                                     requiredMessage="Falta el username"></h:inputText> 
+                                                                     requiredMessage="Falta el username"></h:inputText>
+                                                        <p:watermark for="user" value="acaiza" />
 
                                                     </div>
                                                     <div class="form-group col-md-8">
