@@ -53,13 +53,9 @@ public class AsignacionBean {
 
     public void obtenerUserAsignaciones(ActionEvent event) {
         Usuario u = (Usuario) obtenerDatos.getRowData();
-//        System.out.println("se ha seleccionado la tabla para asignar rol: " + u.getUsu_login());
-        //LoginBean lb = new LoginBean();
         loginBean.setUsuario24(getUsuario());
         RequestContext context = RequestContext.getCurrentInstance();
-        //  System.out.println("paso al siguiente nivel" + context);
         context.addCallbackParam("view", "faces/asignaciones.xhtml");
-        // System.out.println("fin de llegada" + context);
 
     }
 
@@ -78,12 +74,12 @@ public class AsignacionBean {
 
     }
 
-    public List<Rol> getRoles() {
+    public List<Rol> getRolesEnCheckBox() {
         RolDao rd = new RolDao(rol);
         roles = rd.buscarTodos();
 
         for (int i = 0; i < roles.size(); i++) {
-            if (roles.get(i).pertenece(usuario)) {
+            if (rd.existsRolinUser(roles.get(i), usuario)) {
                 roles.get(i).setAsignado(true);
             }
         }
@@ -91,9 +87,21 @@ public class AsignacionBean {
         return roles;
     }
 
-    /**
-     * @param roles the roles to set
-     */
+    public List<Rol> GuardarDatosCheckBox() {
+        RolDao rd = new RolDao(rol);
+        for (int i = 0; i < roles.size(); i++) {
+            if (roles.get(i).isAsignado() == true) {
+                if (rd.existsRolinUser(roles.get(i), usuario)) {
+
+                } else {
+                    roles.get(i).getRol_codigo();
+
+                }
+            }
+        }
+        return roles;
+    }
+
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }

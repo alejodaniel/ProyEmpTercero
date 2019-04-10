@@ -110,15 +110,16 @@ public class RegisterBean {
                 ur.setUsrol_idRol(7);
                 Usuario_RolDao urd = new Usuario_RolDao(ur);
                 urd.persist();
+               
 
                 //System.out.println("el user es: " + usuarioDao.getUser(getUser()));
                 setLogeado(true);
                 DataSource dt = new DataSource();
                 dt.getEntityManager();
-
+               
             } else {
                 msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se guardaron los datos ingresados", null);
-                setLogeado(false);
+                setLogeado(false);   
             }
             FacesContext.getCurrentInstance().addMessage(null, msg);
             context.addCallbackParam("estaLogeado", isLogeado());

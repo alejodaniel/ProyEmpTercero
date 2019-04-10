@@ -82,7 +82,11 @@
                             <h:outputText value="#{rol.descripcion}"/>
                         </p:column>
                         <p:column headerText="Roles">
-
+                            <!--<h:selectBooleanCheckbox  value="Juan " > 
+                                <f:selectItem itemLabel=""  />
+                            </h:selectBooleanCheckbox> -->
+                            
+                            <p:selectBooleanCheckbox value="#{rol.asignado}" itemLabel="Basic"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

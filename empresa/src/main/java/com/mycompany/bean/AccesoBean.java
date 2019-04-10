@@ -23,7 +23,7 @@ public class AccesoBean {
 
     public void login() {
         FacesContext context = FacesContext.getCurrentInstance();
-        if (this.getUsername().equals("senadi2019") && this.getPassword().equals("senadiadm2019")) {
+        if (this.getUsername().equals("senadi") && this.getPassword().equals("senadiadm2019")) {
             context.getExternalContext().getSessionMap().put("user", getUsername());
             setLogeado(true);
             System.out.println("INICIO: "+getUsername());

@@ -1,6 +1,8 @@
 package com.mycompany.DAO;
 
+import com.mycompany.dominio.Rol;
 import com.mycompany.dominio.Usuario;
+import com.mycompany.dominio.Usuario_Rol;
 import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
@@ -26,6 +28,12 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
         } else {
             return true;
         }
+    }
+
+    public Usuario pertencece() {
+        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usrol_idUsuario = u.usu_id");
+        return (Usuario) query.getSingleResult();
+
     }
 
     public Usuario getUsuarioById(int idUsuario) {
@@ -112,6 +120,5 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
         } else {
             return true;
         }
-
-    }
+    }        
 }

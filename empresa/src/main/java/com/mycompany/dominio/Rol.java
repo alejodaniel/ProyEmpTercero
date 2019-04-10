@@ -5,6 +5,7 @@
  */
 package com.mycompany.dominio;
 
+import com.mycompany.DAO.UsuarioDao;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,17 +37,15 @@ public class Rol implements Serializable {
     @Column(name = "link", nullable = false, columnDefinition = "varchar(100)")
     private String link;
 
-    @Transient  
+    @Transient
     private boolean asignado;
-    
-    
-    public boolean pertenece(Usuario usuario){
-        
-       
-        return false;
-        
-    }
-    
+
+//    public boolean pertenece(Usuario usuario) {
+////        UsuarioDao ud = new UsuarioDao(null);
+////        ud.pertencece();
+//            return true;
+//    }
+
     public int getRol_codigo() {
         return rol_codigo;
     }
@@ -55,7 +54,6 @@ public class Rol implements Serializable {
         this.rol_codigo = rol_codigo;
     }
 
-    
     public String getRol_nombre() {
         return rol_nombre;
     }
@@ -64,32 +62,26 @@ public class Rol implements Serializable {
         this.rol_nombre = rol_nombre;
     }
 
-   
     public String getRol_id() {
         return rol_id;
     }
 
-    
     public void setRol_id(String rol_id) {
         this.rol_id = rol_id;
     }
 
-    
     public String getDescripcion() {
         return descripcion;
     }
 
-    
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    
     public String getLink() {
         return link;
     }
 
-   
     public void setLink(String link) {
         this.link = link;
     }

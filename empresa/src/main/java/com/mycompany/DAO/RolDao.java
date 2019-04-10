@@ -6,6 +6,8 @@
 package com.mycompany.DAO;
 
 import com.mycompany.dominio.Rol;
+import com.mycompany.dominio.Usuario;
+import com.mycompany.dominio.Usuario_Rol;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -25,11 +27,22 @@ public class RolDao extends DAOAbstract<Rol> {
         return query.getResultList();
 
     }
-    public boolean pertenece(){
-          Query query = this.getEntityManager().createQuery("Select r from Rol r");
-        return false;
-      
 
+    public boolean existsRolinUser(Rol rol, Usuario u) {
+        System.out.println(rol.getRol_codigo() + " - " + u.getUsu_id());
+        try {
+
+            Query query = this.getEntityManager().createQuery("Select ur from Usuario_Rol ur where ur.usrol_idRol = " + rol.getRol_codigo() + " and ur.usrol_idUsuario = " + u.getUsu_id());
+
+            Usuario_Rol asignacion = (Usuario_Rol) query.getSingleResult();
+            if (asignacion == null) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error: "+ex);
+            return false;
+        }
     }
-
 }
