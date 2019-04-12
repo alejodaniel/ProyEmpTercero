@@ -108,6 +108,7 @@ public class RegisterBean {
                 ur.setUsrol_id(0);
                 ur.setUsrol_idUsuario(u.getUsu_id());
                 ur.setUsrol_idRol(7);
+               // ur.setUsrol_idRol(4);
                 Usuario_RolDao urd = new Usuario_RolDao(ur);
                 urd.persist();
                

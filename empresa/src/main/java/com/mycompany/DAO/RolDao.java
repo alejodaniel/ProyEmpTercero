@@ -29,7 +29,7 @@ public class RolDao extends DAOAbstract<Rol> {
     }
 
     public boolean existsRolinUser(Rol rol, Usuario u) {
-        System.out.println(rol.getRol_codigo() + " - " + u.getUsu_id());
+     
         try {
 
             Query query = this.getEntityManager().createQuery("Select ur from Usuario_Rol ur where ur.usrol_idRol = " + rol.getRol_codigo() + " and ur.usrol_idUsuario = " + u.getUsu_id());
