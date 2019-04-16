@@ -25,7 +25,7 @@
                     <h:form>
                         <span style="font-size: 30px; color: black;">
                             <i class="fas fa-reply"></i>
-                            <h:commandLink action="faces/home.xhtml" style="color: red; font-size: 20px" value="REGRESAR"></h:commandLink>
+                            <h:commandLink action="/home.xhtml" style="color: red; font-size: 20px" value="REGRESAR"></h:commandLink>
                         </span>
                     </h:form>
                 </ul>
@@ -106,13 +106,14 @@
 
                         <p:commandButton value="GUARDAR CAMBIOS" actionListener="#{asignacionBean.GuardarDatosCheckBox}"                                     
                                          icon="ui-icon-check">
+                            <p:confirm message="Seguro que deseas aceptar los cambio?" header="Aviso" icon="ui-icon-alert"/>
                         </p:commandButton>
 
                     </div>  
-                   <!-- <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
                         <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>-->
+                    </p:confirmDialog>
                 </h:form>
 
             </p:panel>
@@ -135,7 +136,9 @@
                     <label>REPETIR NUEVA CONTRASEÑA</label> 
                     <p:password value="#{asignacionBean.rNewPassword}" id="repeatpassword"                               
                                 label="PASSWORD:"/>
-                    <p:commandButton value="ACEPTAR CAMBIOS" actionListener="#{asignacionBean.cambiarPassword}"  icon="ui-icon-check" update="pass"/>
+                    <p:commandButton value="ACEPTAR CAMBIOS" actionListener="#{asignacionBean.cambiarPassword}" oncomplete="PF('wdialogo').hide();" icon="ui-icon-check" update="pass">
+                         <p:confirm message="Seguro que deseas aceptar los cambio?" header="Aviso" icon="ui-icon-alert"/>
+                    </p:commandButton>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

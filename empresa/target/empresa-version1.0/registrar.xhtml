@@ -12,7 +12,29 @@
 
 
     </h:head>
-    <h:body style="background-color: lightpink">
+    <h:body style="background-color: bisque">
+        <nav class="navbar  bg-warning">
+            <div class="container-fluid" style="color: white;">
+                <div class="navbar-header">
+                    <div align="center">
+                        <h:graphicImage library="images" name="iepi.png" style="max-width: 50px"></h:graphicImage> 
+                        <a class="navbar-brand" style="color: blue">SERVICIO NACIONAL DE LOS DERECHOS INTELECTUALES</a>   
+                    </div>
+                </div>
+                <ul class="nav navbar-nav text-right">
+                    <h:form>
+                        <span style="font-size: 30px; color: black;">
+                            <i class="fas fa-reply"></i>
+                            <h:commandLink action="/home.xhtml" style="color: red; font-size: 20px" value="REGRESAR"></h:commandLink>
+                        </span>
+                    </h:form>
+                </ul>
+            </div>
+        </nav>
+        <br/>
+        <br/>
+        <br/>
+
         <p:growl id="mensaje"/>
         <div class="valign-wrapper" id="login-page">
             <div class="container">
@@ -34,14 +56,15 @@
                                                 <div class="form-row">
 
                                                     <div class="form-group col-md-5">
-                                                        <span style="font-size: 25px; color: black;">
+                                                        <!--<span style="font-size: 25px; color: black;">
                                                             <i class="fas fa-user-friends"></i>
-                                                        </span>                                           
-                                                        <p:selectManyCheckbox id="basic" 
-                                                                              required="false" requiredMessage="Seleccione el rol" >
-                                                            <f:selectItem itemLabel="USUARIO" itemValue="Xbox One" />                                                         
-                                                        </p:selectManyCheckbox>
+                                                        </span>-->                                           
+                                                        <!--  <p:selectManyCheckbox id="basic" 
+                                                                                required="false" requiredMessage="Seleccione el rol" >
+                                                              <f:selectItem itemLabel="USUARIO" itemValue="Xbox One" />                                                         
+                                                          </p:selectManyCheckbox>-->
                                                     </div>
+
                                                     <div class="form-group col-md-8">
                                                         <span style="font-size: 25px; color: black;">
                                                             <i class="fas fa-user-friends"></i>
@@ -49,10 +72,10 @@
                                                         <h:outputText value="NOMBRE" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="das" value="#{registerBean.nombre}" required="true" 
                                                                      requiredMessage="Falta el username"></h:inputText> 
-                                                          <p:watermark for="das" value="Nombre Apellido" />
+                                                        <p:watermark for="das" value="Nombre Apellido" />
 
                                                     </div>                                                   
-                                                    <div class="form-group col-md-8">
+                                                    <div class="form-group col-md-9">
                                                         <span style="font-size: 25px; color: black;">
                                                             <i class="fas fa-id-card"></i>
                                                         </span>         
@@ -98,7 +121,7 @@
                                                 </div>
                                                 <div class="center-align">
                                                     <p:commandButton 
-                                                        id="loginButton" value="ACCEDER"
+                                                        id="loginButton" value="REGISTRAR"
                                                         style="font-weight:bold"
                                                         actionListener="#{registerBean.register}"
                                                         update="mensaje"/>
@@ -114,9 +137,9 @@
                 </div>
             </div>
         </div>
-        <div>
-            <button onclick="location.href = 'http://localhost:8080/empresa-version1.0/home.xhtml'">Llévame a otro lado</button>
-            <a href="home.xhtml" title="Mi enlace">Mi enlace</a>
-        </div>
+        <!-- <div>
+           <button onclick="location.href = 'htp://localhost:8080/empresa-version1.0/home.xhtml'">Llévame a otro lado</button>
+             <a href="home.xhtml" title="Mi enlace">Mi enlace</a>
+         </div>-->
     </h:body>
 </html>

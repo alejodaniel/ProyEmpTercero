@@ -66,16 +66,6 @@
                         <a href="asignaciones.xhtml" title="Mi enlace" style="color: blue">ASIGNACIONES</a>
                     </span>
                 </div>
-                <div>
-                    <h:form>
-                        <span style="font-size: 30px; color: black;">
-                            <i class="fas fa-sign-out-alt"></i>&nbsp;
-                            <h:commandLink action="#{actionBean.logout()}" style="color: red;font-size: 20px" value="CERRAR SESION"></h:commandLink>
-                        </span>
-                    </h:form> 
-                </div>
-
-
             </p:sidebar>  
 
         </h:form>
@@ -94,7 +84,7 @@
                                  paginator="true"                                 
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"                                  
                                  binding="#{actionBean.datosObtenidos}"
-                                 value="#{actionBean.usuarios}" var="us" editable="true" >
+                                 value="#{actionBean.usuario}" var="us" editable="true" >
 
                         <p:column headerText="Nombre" filterBy="#{us.usu_nombre}" filterMatchMode="contains">
                             <h:outputText value="#{us.usu_nombre}"/>
@@ -118,9 +108,9 @@
                                 <p:commandButton value="asignar"     
                                                  actionListener="#{actionBean.obtenerUserAsignaciones}" update="tabla" icon="ui-icon-trahs"
                                                  oncomplete="manejarLogin(xhr, status, args)">
-                                   
+
                                 </p:commandButton>
-                              
+
                             </p:commandLink>
                         </p:column> 
 
@@ -134,46 +124,18 @@
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" update="tabla"/>
             </p:confirmDialog>
         </h:form>
-
-        <div class="card border-dark">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-7">
-                        © 2018 SENADI. Todos los derechos reservados.
-                    </div>
-                    <div class="col-5">
-
-                        <div class="redes-footer" ALIGN="left">
-                            ENCUENTRANOS EN LAS REDES:
-                            <a href="https://www.propiedadintelectual.gob.ec/">
-                                <h:graphicImage library="images" name="iepi.png" style="max-width: 30px"> </h:graphicImage>
-
-                            </a>
-                            <a href="https://www.facebook.com/SENADI.Ecuador/?eid=ARDOsIcfAm_CTjb_XWd7m9hvUw2E6UVplbym8Fap-iBb9ARzk0Gpk4zFAXT8G66XdYnUFTCBJYInXcS7">
-                                <h:graphicImage library="images" name="facebook.png" style="max-width: 30px"> </h:graphicImage>
-                            </a>
-                            <a href="https://www.youtube.com/user/IEPIEcuador">
-
-                                <h:graphicImage library="images" name="yputube.jpg" style="max-width: 30px"> </h:graphicImage>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </h:body>
     <script>
         //<![CDATA[
         function manejarLogin(xhr, status, args) {
             //if (args.estaLogeado) {
-                console.log(args);
-                console.log(xhr);
-                console.log(status);
+            console.log(args);
+            console.log(xhr);
+            console.log(status);
 
-                setTimeout(function () {
-                    window.location = args.view;
-                }, 500);
+            setTimeout(function () {
+                window.location = args.view;
+            }, 500);
             //}
         }
         //]]>

@@ -118,6 +118,8 @@ public class RegisterBean {
                 setLogeado(true);
                 DataSource dt = new DataSource();
                 dt.getEntityManager();
+                LoginBean lv = new LoginBean();
+                lv.getUsuario();
                
             } else {
                 msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se guardaron los datos ingresados", null);

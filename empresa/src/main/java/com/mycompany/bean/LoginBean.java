@@ -14,6 +14,8 @@ import static com.mycompany.ucc.Password.Encriptar;
 //import com.mycompany.ucc.Usuarioucc;
 //import com.mycompany.util.SessionUtils;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -46,10 +48,12 @@ public class LoginBean {
 
     public LoginBean() {
         DataSource.getEntityManager();
-
+        Calendar cal = Calendar.getInstance();
+        Date hour = cal.getTime();
+        System.out.println("la fecha actual es :" +hour);
     }
 
-     public void login(ActionEvent action) throws Exception {
+    public void login(ActionEvent action) throws Exception {
         this.getUsuario();
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -76,6 +80,7 @@ public class LoginBean {
         }
 
     }
+
     public List<Usuario> getUsuario() {
         UsuarioDao ud = new UsuarioDao(getUsuario24());
         usuarios = ud.buscarTodos();
@@ -133,8 +138,6 @@ public class LoginBean {
         this.logeado = logeado;
     }
 
-   
-
     public String action() {
         logeado = true;
         return "/opcion.xhtml";
@@ -145,7 +148,6 @@ public class LoginBean {
 //        session.invalidate();
 //        return "index";
 //    }
-
     /**
      * @return the usuarios
      */
