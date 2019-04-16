@@ -119,33 +119,54 @@ public class AsignacionBean {
     }
 
     public List<Rol> GuardarDatosCheckBox(ActionEvent event) {
-        System.out.println("PRUEBA");
-        RolDao rd = new RolDao(rol);
+//        System.out.println("asdasdas");
+        RolDao rd;
+
         for (int i = 0; i < roles.size(); i++) {
-            if (roles.get(i).isAsignado() == true) {
-                if (rd.existsRolinUser(roles.get(i), usuario)) {
+            rd = new RolDao(null);
+            if (roles.get(i).isAsignado() == true && !rd.existsRolinUser(roles.get(i), usuario)) {
+                //  System.out.println("trues: " + roles.get(i).isAsignado());
 
-                } else {
-                    Usuario_Rol usr = new Usuario_Rol();
-                    usr.getUsrol_id();
-                    usr.setUsrol_idRol(i);
-                    usr.setUsrol_idUsuario(usuario.getUsu_id());
-                    Usuario_RolDao urd = new Usuario_RolDao(usr);
-                    urd.persist();
-                }
-            } else {
-                if (rd.existsRolinUser(roles.get(i), usuario)) {
-                    Usuario_Rol usr = new Usuario_Rol();
-                    usr.getUsrol_id();
-                    usr.getUsrol_idUsuario();
-                    usr.getUsrol_idRol();
-                    Usuario_RolDao urd = new Usuario_RolDao(usr);
-                    urd.remove();
+                Usuario_Rol usr = new Usuario_Rol();
+//                usr.getUsrol_id();
+                usr.setUsrol_idRol(roles.get(i).getRol_codigo());
+                usr.setUsrol_idUsuario(usuario.getUsu_id());
+                Usuario_RolDao urd = new Usuario_RolDao(usr);
+                urd.persist();
+               // FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Los Cambios se realizaron Correctamente", null));
 
-                }
+                //RequestContext context = RequestContext.getCurrentInstance();
+
+               // context.addCallbackParam("view", "home.xhtml");
+
+            } else if (roles.get(i).isAsignado() == false && rd.existsRolinUser(roles.get(i), usuario)) {
+                System.out.println("------- -> " + roles.get(i).getRol_codigo() + "-" + usuario.getUsu_id());
+                //   System.out.println("siguiente nivel");
+                // System.out.println("se borra");
+                Usuario_RolDao urd = new Usuario_RolDao(null);
+                Usuario_Rol usr = urd.getUsuario_Rol(usuario.getUsu_id(), roles.get(i).getRol_codigo());
+
+                System.out.println("das: " + usr.getUsrol_id());
+
+                removerUr(usr);
+//                roles.remove(i);
             }
+
         }
+
         return roles;
+    }
+
+    public boolean removerUr(Usuario_Rol usr) {
+        try {
+            Usuario_RolDao urd = new Usuario_RolDao(usr);
+            urd.remove();
+            return true;
+        } catch (Exception ex) {
+            System.out.println("error: " + ex);
+            return false;
+        }
+
     }
 
     public void setRoles(List<Rol> roles) {

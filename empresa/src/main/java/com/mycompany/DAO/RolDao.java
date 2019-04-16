@@ -41,7 +41,7 @@ public class RolDao extends DAOAbstract<Rol> {
                 return true;
             }
         } catch (Exception ex) {
-            System.out.println("Error: "+ex);
+//            System.out.println("Error: "+ex);
             return false;
         }
     }

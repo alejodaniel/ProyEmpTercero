@@ -38,10 +38,20 @@ public class Usuario_RolDao extends DAOAbstract<Usuario_Rol> {
         }
     }
 
-    public Usuario pertencece() {
-        Query query = this.getEntityManager().createQuery("Select u from Usuario_Rol u where u.usrol_idUsuario = p.usu_id");
-        return (Usuario) query.getSingleResult();
+    public Usuario_Rol getUsuario_Rol(int idUsuario, int idRol) {
+//        System.out.println("589+859589598");
+        try {
+            Query query = this.getEntityManager().createQuery("Select u from Usuario_Rol u where u.usrol_idRol =  " + idRol + " and u.usrol_idUsuario= " + idUsuario);
+            return (Usuario_Rol) query.getSingleResult();
+        } catch (Exception ex) {
+            return null;
+        }
 
     }
 
+//    public Usuario pertencece() {
+//        Query query = this.getEntityManager().createQuery("Select u from Usuario_Rol u where u.usrol_idUsuario = p.usu_id");
+//        return (Usuario) query.getSingleResult();
+//
+//    }
 }

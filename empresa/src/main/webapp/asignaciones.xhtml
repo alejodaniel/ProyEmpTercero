@@ -38,7 +38,7 @@
                 <i class="fas fa-user-plus fa-1x">NUEVO</i>
             </a>
             <p:panel id="lista" header="DATOS PERSONALES" 
-                     style="margin-bottom: 500px; width: 950px; height: 1050px;">
+                     style="margin-bottom: 500px; width: 1000px; height: 1100px;">
                 <h:form>                   
 
                     <div class="row">
@@ -62,28 +62,34 @@
 
                         </div>
                     </div>                            
-                    <br/>                   
-                    <h:form>    
-                        <span style="font-size: 30px; color: black;">
-                            <i class="fas fa-lock-open"></i>
-                        </span>
-
-                        <a  onclick="PF('wdialogo').show();" actionListener="#{actionBean.setAccion('R')}" update=":frmDialogo">
-                            <i class="fas fa-user-plus fa-1x">CAMBIAR CONTRASEÑA</i>
-                        </a>
-
-                    </h:form>   
                     <br/>
+                </h:form>
+                <h:form>    
+                    <span style="font-size: 30px; color: black;">
+                        <i class="fas fa-lock-open"></i>
+                    </span>
+
+                    <a  onclick="PF('wdialogo').show();" actionListener="#{actionBean.setAccion('R')}" update=":frmDialogo">
+                        <i class="fas fa-user-plus fa-1x">CAMBIAR CONTRASEÑA</i>
+                    </a>
+
+                </h:form>   
+                <br/>
+                <h:form>
                     <h1 style="color: blue">ASIGNACIÓN DE ROLES</h1>
                     <p:dataTable id="tabla" emptyMessage="No hay registros"
                                  rows="11"                                                                      
-                                 value="#{asignacionBean.rolesEnCheckBox}" var="rol" editable="true" >
+                                 value="#{asignacionBean.rolesEnCheckBox}" var="rol" editable="true" 
+                                 >
 
                         <p:column headerText="Nombre">
                             <h:outputText value="#{rol.rol_nombre}"/>
                         </p:column>
                         <p:column headerText="Descripcion">
                             <h:outputText value="#{rol.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{rol.rol_codigo}"/>
                         </p:column>
                         <p:column headerText="Roles">
                             <!--<h:selectBooleanCheckbox  value="Juan " > 
@@ -92,34 +98,44 @@
                             <p:selectBooleanCheckbox value="#{rol.asignado}" itemLabel=""/>
                         </p:column>
                     </p:dataTable>
-                </h:form>
-                <br/>
-                <br/>
-                <h:form>
+
+                    <br/>
+                    <br/>
+
                     <div class="center-align">
-                        <h:commandButton value="dasdasdsa" actionListener="#{asignacionBean.GuardarDatosCheckBox}" style="font-family: cursive"></h:commandButton>
-                    </div>   
+
+                        <p:commandButton value="GUARDAR CAMBIOS" actionListener="#{asignacionBean.GuardarDatosCheckBox}"                                     
+                                         icon="ui-icon-check">
+                        </p:commandButton>
+
+                    </div>  
+                   <!-- <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>-->
                 </h:form>
 
             </p:panel>
         </div>
-        <p:dialog id="dialogo" widgetVar="wdialogo" header="NUEVO USUARIO" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+        <p:dialog id="dialogo" widgetVar="wdialogo" header="CAMBIO DE CONTRASEÑAS" modal="true" resizable="false" closeOnEscape="true" draggable="false">
+            <p:growl id="pass"/>
             <h:form id="frmDialogo">
+
                 <h:panelGrid columns="2">
                     <label>CONTRASEÑA ANTERIOR</label>     
 
-                    <p:inputText value="#{asignacionBean.password}" id="username"
-                                 required="true" requiredMessage="Falta el usuario"
-                                 label="USERNAME:"/>
-                    <label>NUEVA CONTRASEÑA:</label>    
-                    <p:password value="#{asignacionBean.newPassword}" id="password" 
-                                required="true" requiredMessage="Falta la contraseña"
+                    <p:password value="#{asignacionBean.password}" id="passanterior" 
+                                required="true" requiredMessage="falta la contraseña anterior"
+                                label="USERNAME:"/>
+
+                    <label>NUEVA CONTRASEÑA:</label>
+                    <p:password value="#{asignacionBean.newPassword}" id="password"                          
                                 label="PASSWORD:"/>
-                    <label>REPETIR NUEVA CONTRASEÑA</label>    
-                    <p:password value="#{asignacionBean.rNewPassword}" id="passaword" 
-                                required="true" requiredMessage="Falta la contraseña"
+
+                    <label>REPETIR NUEVA CONTRASEÑA</label> 
+                    <p:password value="#{asignacionBean.rNewPassword}" id="repeatpassword"                               
                                 label="PASSWORD:"/>
-                    <p:commandButton value="ACEPTAR CAMBIOS" actionListener="#{asignacionBean.cambiarPassword}"  icon="ui-icon-check" />
+                    <p:commandButton value="ACEPTAR CAMBIOS" actionListener="#{asignacionBean.cambiarPassword}"  icon="ui-icon-check" update="pass"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>
