@@ -11,7 +11,8 @@ import com.mycompany.DAO.Usuario_RolDao;
 import com.mycompany.dominio.Usuario;
 import com.mycompany.dominio.Usuario_Rol;
 import com.mycompany.ucc.Password;
-import static com.mycompany.ucc.Password.getMD5;
+import static com.mycompany.ucc.Password.Encriptar;
+
 import com.mycompany.ucc.Usuario_Rolucc;
 import com.mycompany.ucc.ValidarCedulaEcuatoriana;
 import java.util.ArrayList;
@@ -71,10 +72,10 @@ public class RegisterBean {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         Usuario us = new Usuario();
-        md5 = getMD5(getPassword());
+        md5 = Encriptar(getPassword());
         us.setUsu_login(getUser());
         us.setUsu_password(md5);
-        System.out.println(getMD5(getPassword()));
+        System.out.println(Encriptar(getPassword()));
 
         //------------------------------------------
         us.setUsu_nombre(getNombre());

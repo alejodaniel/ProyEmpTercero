@@ -9,6 +9,8 @@ import com.mycompany.DAO.DataSource;
 import com.mycompany.DAO.UsuarioDao;
 import static com.mycompany.bean.LoginBean.getLista;
 import com.mycompany.dominio.Usuario;
+import static com.mycompany.ucc.Password.Desencriptar;
+import static com.mycompany.ucc.Password.Encriptar;
 //import com.mycompany.ucc.Usuarioucc;
 //import com.mycompany.util.SessionUtils;
 import java.util.ArrayList;
@@ -47,13 +49,13 @@ public class LoginBean {
 
     }
 
-     public void login(ActionEvent action) {
+     public void login(ActionEvent action) throws Exception {
         this.getUsuario();
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         // Usuario us = new Usuario();
         UsuarioDao ud = new UsuarioDao(null);
-        boolean estado = ud.verificacionLogin(getUser(), getPassword());
+        boolean estado = ud.verificacionLogin(getUser(), Encriptar(getPassword()));
         if (estado == true) {
 //            usuario24 = ud.;
             ud = new UsuarioDao(null);

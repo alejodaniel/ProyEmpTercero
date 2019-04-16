@@ -6,6 +6,8 @@ import com.mycompany.DAO.Usuario_RolDao;
 import com.mycompany.dominio.Rol;
 import com.mycompany.dominio.Usuario;
 import com.mycompany.dominio.Usuario_Rol;
+import static com.mycompany.ucc.Password.Desencriptar;
+import static com.mycompany.ucc.Password.Encriptar;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -69,29 +71,27 @@ public class AsignacionBean {
         return obtenerDatos;
     }
 
-    public void cambiarPassword(ActionEvent event) {
-        if (password != null && newPassword != null && rNewPassword != null) {
-            System.out.println("inicio");
-            System.out.println("ggggg " + newPassword.equals(rNewPassword));
-            if (newPassword.equals(rNewPassword)) {
+    public void cambiarPassword(ActionEvent event) throws Exception {
+        if (Encriptar(password) != null && Encriptar(newPassword) != null && Encriptar(rNewPassword) != null) {
+
+            if (Encriptar(newPassword).equals(Encriptar(rNewPassword))) {
                 System.out.println("prueba");
-                if (usuario.getUsu_password().equals(password)) {
-                    usuario.setUsu_password(newPassword);
+                if (usuario.getUsu_password().equals(Encriptar(password))) {
+                    usuario.setUsu_password(Encriptar(newPassword));
                     UsuarioDao user = new UsuarioDao(usuario);
                     user.update();
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La contraseña se actualizó correctamente", "La contraseña se actualizó correctamente"));
                 } else {
-                    System.out.println("fallo");
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Contraseña anterior no es la correcta", "La Contraseña anterior no es la correcta"));
                 }
             } else {
                 System.out.println("pruebafin");
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrectos", "Incorrectos"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Las Claves no Coinciden", "Las Claves no Coinciden"));
 
             }
-
         } else {
             System.out.println("iniciofin");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Credenciales Incorrectos", "Credenciales Incorrectos"));
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falta rellenar un campo", "Falta rellenar un campo"));
         }
     }
 
@@ -133,12 +133,10 @@ public class AsignacionBean {
                 usr.setUsrol_idUsuario(usuario.getUsu_id());
                 Usuario_RolDao urd = new Usuario_RolDao(usr);
                 urd.persist();
-               // FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Los Cambios se realizaron Correctamente", null));
+                // FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Los Cambios se realizaron Correctamente", null));
 
                 //RequestContext context = RequestContext.getCurrentInstance();
-
-               // context.addCallbackParam("view", "home.xhtml");
-
+                // context.addCallbackParam("view", "home.xhtml");
             } else if (roles.get(i).isAsignado() == false && rd.existsRolinUser(roles.get(i), usuario)) {
                 System.out.println("------- -> " + roles.get(i).getRol_codigo() + "-" + usuario.getUsu_id());
                 //   System.out.println("siguiente nivel");
