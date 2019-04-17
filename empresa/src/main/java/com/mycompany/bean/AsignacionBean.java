@@ -95,9 +95,7 @@ public class AsignacionBean {
         }
     }
 
-    /**
-     * @param obtenerDatos the obtenerDatos to set
-     */
+    
     public void setObtenerDatos(UIData obtenerDatos) {
         this.obtenerDatos = obtenerDatos;
     }

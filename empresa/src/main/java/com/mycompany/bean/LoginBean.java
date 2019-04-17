@@ -7,6 +7,7 @@ package com.mycompany.bean;
 
 import com.mycompany.DAO.DataSource;
 import com.mycompany.DAO.UsuarioDao;
+import com.mycompany.DAO.Usuario_RolDao;
 import static com.mycompany.bean.LoginBean.getLista;
 import com.mycompany.dominio.Usuario;
 import static com.mycompany.ucc.Password.Desencriptar;
@@ -50,7 +51,7 @@ public class LoginBean {
         DataSource.getEntityManager();
         Calendar cal = Calendar.getInstance();
         Date hour = cal.getTime();
-        System.out.println("la fecha actual es :" +hour);
+        System.out.println("la fecha actual es :" + hour);
     }
 
     public void login(ActionEvent action) throws Exception {
@@ -60,12 +61,19 @@ public class LoginBean {
         // Usuario us = new Usuario();
         UsuarioDao ud = new UsuarioDao(null);
         boolean estado = ud.verificacionLogin(getUser(), Encriptar(getPassword()));
+
         if (estado == true) {
-//            usuario24 = ud.;
-            ud = new UsuarioDao(null);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", getUser());
-            System.out.println("WELCOME:  " + user);
-            setLogeado(true);
+            Usuario prueba = ud.obtenerUsuario(getUser(), Encriptar(getPassword()));
+            Usuario_RolDao urd = new Usuario_RolDao(null);
+            System.out.println(urd.getUsuario_RolLogin(prueba.getUsu_id(), 7));
+            if (urd.getUsuario_RolLogin(prueba.getUsu_id(), 7)) {
+                ud = new UsuarioDao(null);
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", getUser());
+                System.out.println("WELCOME:  " + user);
+                setLogeado(true);
+            } else {
+                msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no permitido", "Usuario no permitido");
+            }
         } else {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "ERROR AL ACCEDER", "Credenciales incorrectos");
             setLogeado(false);

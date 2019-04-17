@@ -8,6 +8,7 @@ package com.mycompany.DAO;
 import com.mycompany.dominio.Usuario;
 import com.mycompany.dominio.Usuario_Rol;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -45,6 +46,18 @@ public class Usuario_RolDao extends DAOAbstract<Usuario_Rol> {
             return (Usuario_Rol) query.getSingleResult();
         } catch (Exception ex) {
             return null;
+        }
+
+    }
+
+    public boolean getUsuario_RolLogin(int idUsuario, int idRol) {
+//        System.out.println("589+859589598");
+        try {
+            Query query = this.getEntityManager().createQuery("Select u from Usuario_Rol u where u.usrol_idRol =  " + idRol + " and u.usrol_idUsuario= " + idUsuario);
+            Usuario_Rol usuario_Rol = (Usuario_Rol) query.getSingleResult();
+            return true;
+        } catch (NoResultException e) {
+            return false;
         }
 
     }

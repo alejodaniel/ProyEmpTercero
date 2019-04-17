@@ -63,8 +63,8 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
     }
 
     public Usuario obtenerUsuario(String user, String pass) {
-        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login '" + user + "' AND u.usu_password= '" + pass + "'");
-        return (Usuario) query.getSingleResult();
+        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login='" + user + "' AND u.usu_password= '" + pass + "'");
+        return  (Usuario) query.getSingleResult();
     }
 
     public List<Usuario> buscarPorCriterio(String escribir) {
@@ -120,5 +120,6 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
         } else {
             return true;
         }
-    }        
+    }  
+    
 }

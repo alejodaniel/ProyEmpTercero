@@ -91,6 +91,7 @@
                                                         </span>
                                                         <h:outputText value="USERNAME" style="font-weight:bold"/> &nbsp; 
                                                         <h:inputText id="user" value="#{registerBean.user}" required="true"
+                                                                     style="text-transform: lowercase"
                                                                      requiredMessage="Falta el username"></h:inputText>
                                                         <p:watermark for="user" value="acaiza" />
 
@@ -101,7 +102,7 @@
                                                         </span>
                                                         <h:outputText value="CONTRASEÑA" style="font-weight:bold"/> &nbsp;
                                                         <h:inputSecret id="password" value="#{registerBean.password}" required="true"
-                                                                       maxlength="20" style="text-transform: lowercase"
+                                                                       maxlength="20" 
                                                                        requiredMessage="Falta la contraseña"></h:inputSecret>
 
                                                     </div>                                           
