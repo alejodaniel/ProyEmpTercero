@@ -6,8 +6,9 @@ import com.mycompany.DAO.Usuario_RolDao;
 import com.mycompany.dominio.Rol;
 import com.mycompany.dominio.Usuario;
 import com.mycompany.dominio.Usuario_Rol;
-import static com.mycompany.ucc.Password.Desencriptar;
 import static com.mycompany.ucc.Password.Encriptar;
+import static com.mycompany.ucc.Password.getMD5;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -36,7 +37,7 @@ public class AsignacionBean {
     private LoginBean loginBean;
 
     public AsignacionBean() {
-
+        roles = new ArrayList<>();
         loginBean = getLoginBean();
         usuario = loginBean.getUsuarioFlotante();
 
@@ -53,7 +54,7 @@ public class AsignacionBean {
         }
     }
 
-    public LoginBean getLoginBean() {
+    private LoginBean getLoginBean() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         LoginBean lb = (LoginBean) session.getAttribute("loginBean");
         return lb;
@@ -72,30 +73,31 @@ public class AsignacionBean {
     }
 
     public void cambiarPassword(ActionEvent event) throws Exception {
-        if (Encriptar(password) != null && Encriptar(newPassword) != null && Encriptar(rNewPassword) != null) {
+        //if (getMD5(password) != null && (newPassword) != null && getMD5(rNewPassword) != null) {
 
-            if (Encriptar(newPassword).equals(Encriptar(rNewPassword))) {
-                System.out.println("prueba");
-                if (usuario.getUsu_password().equals(Encriptar(password))) {
-                    usuario.setUsu_password(Encriptar(newPassword));
-                    UsuarioDao user = new UsuarioDao(usuario);
-                    user.update();
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La contraseña se actualizó correctamente", "La contraseña se actualizó correctamente"));
-                } else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Contraseña anterior no es la correcta", "La Contraseña anterior no es la correcta"));
-                }
+        if (getMD5(newPassword).equals(getMD5(rNewPassword))) {
+//            System.out.println("prueba");
+
+            if (usuario.getUsu_password().equals(getMD5(password))) {
+                usuario.setUsu_password(getMD5(newPassword));
+                UsuarioDao user = new UsuarioDao(usuario);
+                user.update();
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.addCallbackParam("view", "faces/asignaciones.xhtml");
+               
+                
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La contraseña se actualizó correctamente", "La contraseña se actualizó correctamente"));
             } else {
-                System.out.println("pruebafin");
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Las Claves no Coinciden", "Las Claves no Coinciden"));
-
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Contraseña anterior no es la correcta", "La Contraseña anterior no es la correcta"));
             }
         } else {
-            System.out.println("iniciofin");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Falta rellenar un campo", "Falta rellenar un campo"));
+            //   System.out.println("pruebafin");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Las Claves no Coinciden", "Las Claves no Coinciden"));
+//
         }
+
     }
 
-    
     public void setObtenerDatos(UIData obtenerDatos) {
         this.obtenerDatos = obtenerDatos;
     }
@@ -104,9 +106,15 @@ public class AsignacionBean {
 
     }
 
-    public List<Rol> getRolesEnCheckBox() {
-        RolDao rd = new RolDao(rol);
+    public List<Rol> getRoles() {
+        RolDao rd = new RolDao(null);
+        System.out.println("-------------> " + usuario.getUsu_nombre());
+        roles = new ArrayList();
         roles = rd.buscarTodos();
+
+        for (int i = 0; i < roles.size(); i++) {
+            roles.get(i).setAsignado(false);
+        }
 
         for (int i = 0; i < roles.size(); i++) {
             if (rd.existsRolinUser(roles.get(i), usuario)) {
@@ -116,8 +124,8 @@ public class AsignacionBean {
         return roles;
     }
 
-    public List<Rol> GuardarDatosCheckBox(ActionEvent event) {
-//        System.out.println("asdasdas");
+    public void GuardarDatosCheckBox(ActionEvent event) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Los Cambios se realizaron Correctamente", "Los Cambios se realizaron Correctamente"));
         RolDao rd;
 
         for (int i = 0; i < roles.size(); i++) {
@@ -131,7 +139,10 @@ public class AsignacionBean {
                 usr.setUsrol_idUsuario(usuario.getUsu_id());
                 Usuario_RolDao urd = new Usuario_RolDao(usr);
                 urd.persist();
-                // FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Los Cambios se realizaron Correctamente", null));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Los Cambios se realizaron Correctamente", "Los Cambios se realizaron Correctamente"));
+                System.out.println("CAMBIOS CORRECTAMENTE");
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.addCallbackParam("view", "faces/home.xhtml");
 
                 //RequestContext context = RequestContext.getCurrentInstance();
                 // context.addCallbackParam("view", "home.xhtml");
@@ -150,13 +161,13 @@ public class AsignacionBean {
 
         }
 
-        return roles;
     }
 
     public boolean removerUr(Usuario_Rol usr) {
         try {
             Usuario_RolDao urd = new Usuario_RolDao(usr);
             urd.remove();
+
             return true;
         } catch (Exception ex) {
             System.out.println("error: " + ex);

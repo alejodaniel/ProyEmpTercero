@@ -35,7 +35,7 @@
         <br/>
         <br/>
 
-        <p:growl id="mensaje"/>
+        <p:growl id="mensaje" life="1000"/>
         <div class="valign-wrapper" id="login-page">
             <div class="container">
                 <div class="center-align" >
@@ -70,7 +70,7 @@
                                                             <i class="fas fa-user-friends"></i>
                                                         </span>
                                                         <h:outputText value="NOMBRE" style="font-weight:bold"/> &nbsp; 
-                                                        <h:inputText id="das" value="#{registerBean.nombre}" required="true" 
+                                                        <h:inputText id="das" value="#{registerBean.nombre}" required="true"  
                                                                      requiredMessage="Falta el username"></h:inputText> 
                                                         <p:watermark for="das" value="Nombre Apellido" />
 
@@ -125,8 +125,15 @@
                                                         id="loginButton" value="REGISTRAR"
                                                         style="font-weight:bold"
                                                         actionListener="#{registerBean.register}"
-                                                        update="mensaje"/>
+                                                        update="mensaje">
+                                                        <p:confirm message="Seguro que deseas aceptar los cambio?" header="Aviso" icon="ui-icon-alert"/>
+                                                    </p:commandButton>
+
                                                 </div>
+                                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                                </p:confirmDialog>
 
                                             </h:form>
                                         </div>
@@ -143,4 +150,19 @@
              <a href="home.xhtml" title="Mi enlace">Mi enlace</a>
          </div>-->
     </h:body>
+    <script>
+        //<![CDATA[
+        function manejarLogin(xhr, status, args) {
+           
+                console.log(args);
+                console.log(xhr);
+                console.log(status);
+
+                setTimeout(function () {
+                    window.location = args.view;
+                }, 500);
+            }
+        }
+        //]]>
+    </script>
 </html>

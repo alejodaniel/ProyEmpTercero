@@ -12,6 +12,7 @@ import static com.mycompany.bean.LoginBean.getLista;
 import com.mycompany.dominio.Usuario;
 import static com.mycompany.ucc.Password.Desencriptar;
 import static com.mycompany.ucc.Password.Encriptar;
+import static com.mycompany.ucc.Password.getMD5;
 //import com.mycompany.ucc.Usuarioucc;
 //import com.mycompany.util.SessionUtils;
 import java.util.ArrayList;
@@ -60,10 +61,10 @@ public class LoginBean {
         FacesMessage msg = null;
         // Usuario us = new Usuario();
         UsuarioDao ud = new UsuarioDao(null);
-        boolean estado = ud.verificacionLogin(getUser(), Encriptar(getPassword()));
+        boolean estado = ud.verificacionLogin(getUser(), getMD5(getPassword()));
 
         if (estado == true) {
-            Usuario prueba = ud.obtenerUsuario(getUser(), Encriptar(getPassword()));
+            Usuario prueba = ud.obtenerUsuario(getUser(), getMD5(getPassword()));
             Usuario_RolDao urd = new Usuario_RolDao(null);
             System.out.println(urd.getUsuario_RolLogin(prueba.getUsu_id(), 7));
             if (urd.getUsuario_RolLogin(prueba.getUsu_id(), 7)) {

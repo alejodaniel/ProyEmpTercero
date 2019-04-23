@@ -12,6 +12,7 @@ import com.mycompany.dominio.Usuario;
 import com.mycompany.dominio.Usuario_Rol;
 import com.mycompany.ucc.Password;
 import static com.mycompany.ucc.Password.Encriptar;
+import static com.mycompany.ucc.Password.getMD5;
 
 import com.mycompany.ucc.Usuario_Rolucc;
 import com.mycompany.ucc.ValidarCedulaEcuatoriana;
@@ -72,10 +73,11 @@ public class RegisterBean {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         Usuario us = new Usuario();
-        md5 = Encriptar(getPassword());
+        //md5 = Encriptar(getPassword());
+        md5 = getMD5(getPassword());
         us.setUsu_login(getUser());
         us.setUsu_password(md5);
-        System.out.println(Encriptar(getPassword()));
+        System.out.println(getMD5(getPassword()));
 
         //------------------------------------------
         us.setUsu_nombre(getNombre());
@@ -105,32 +107,35 @@ public class RegisterBean {
                 Usuario u = usuarioDao.getUser(us.getUsu_login());
                 System.out.println("" + u.getUsu_id());
                 Usuario_Rol ur = new Usuario_Rol();
-           
+
                 ur.setUsrol_id(0);
                 ur.setUsrol_idUsuario(u.getUsu_id());
                 ur.setUsrol_idRol(7);
-               // ur.setUsrol_idRol(4);
+                // ur.setUsrol_idRol(4);
                 Usuario_RolDao urd = new Usuario_RolDao(ur);
                 urd.persist();
-               
-
                 //System.out.println("el user es: " + usuarioDao.getUser(getUser()));
                 setLogeado(true);
                 DataSource dt = new DataSource();
                 dt.getEntityManager();
                 LoginBean lv = new LoginBean();
                 lv.getUsuario();
-               
+
             } else {
                 msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se guardaron los datos ingresados", null);
-                setLogeado(false);   
+                setLogeado(false);
             }
             FacesContext.getCurrentInstance().addMessage(null, msg);
             context.addCallbackParam("estaLogeado", isLogeado());
             if (isLogeado()) {
-                context.addCallbackParam("view", "index.xhtml");
+                context.addCallbackParam("view", "#");
+                cedula = null;
+                nombre = null;
+                password = null;
+                user = null;
+
             } else if (estado == false) {
-                context.addCallbackParam("view", "home.xhtml");
+                context.addCallbackParam("view", "faces/registrar.xhtml");
             }
         }
 

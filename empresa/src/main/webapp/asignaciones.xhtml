@@ -12,7 +12,7 @@
 
     </h:head>
     <h:body style="background: bisque">
-        <p:growl id="mensaje"/>
+        <p:growl id="mensaje" life="1000"/>
         <nav class="navbar  bg-warning">
             <div class="container-fluid" style="color: white;">
                 <div class="navbar-header">
@@ -24,19 +24,26 @@
                 <ul class="nav navbar-nav text-right">
                     <h:form>
                         <span style="font-size: 30px; color: black;">
-                            <i class="fas fa-reply"></i>
-                            <h:commandLink action="/home.xhtml" style="color: red; font-size: 20px" value="REGRESAR"></h:commandLink>
+                            <i class="fas fa-sign-out-alt"></i>
+                            <h:commandLink action="#{actionBean.logout()}" style="color: red; font-size: 20px" value="CERRAR SESION"></h:commandLink>
                         </span>
                     </h:form>
                 </ul>
             </div>
         </nav>
+        <div class="text-right">
+            <ul class="nav navbar-nav text-right">
+                <h:form> <span style="font-size: 30px; color: black;"> 
+                        <i class="fas fa-reply"></i> 
+                        <h:commandLink action="/home.xhtml" style="color: red; font-size: 20px" value="REGRESAR"> </h:commandLink>
+                    </span> 
+                </h:form>
+            </ul>
+        </div>
         <h1 align="center">ASIGNACIONES</h1>
 
         <div align="center">
-            <a  onclick="PF('wdialogo').show();" actionListener="#{actionBean.setAccion('R')}" update=":frmDialogo">
-                <i class="fas fa-user-plus fa-1x">NUEVO</i>
-            </a>
+
             <p:panel id="lista" header="DATOS PERSONALES" 
                      style="margin-bottom: 500px; width: 1000px; height: 1100px;">
                 <h:form>                   
@@ -79,7 +86,7 @@
                     <h1 style="color: blue">ASIGNACIÓN DE ROLES</h1>
                     <p:dataTable id="tabla" emptyMessage="No hay registros"
                                  rows="11"                                                                      
-                                 value="#{asignacionBean.rolesEnCheckBox}" var="rol" editable="true" 
+                                 value="#{asignacionBean.roles}" var="rol" editable="true" 
                                  >
 
                         <p:column headerText="Nombre">
@@ -103,15 +110,15 @@
                     <br/>
 
                     <div class="center-align">
-
+                        <p:growl id="guardar" life="1000"/>
                         <p:commandButton value="GUARDAR CAMBIOS" actionListener="#{asignacionBean.GuardarDatosCheckBox}"                                     
-                                         icon="ui-icon-check">
+                                         icon="ui-icon-check" update="guardar">
                             <p:confirm message="Seguro que deseas aceptar los cambio?" header="Aviso" icon="ui-icon-alert"/>
                         </p:commandButton>
 
                     </div>  
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('wdialogo').hide();"/>
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                 </h:form>
@@ -119,25 +126,27 @@
             </p:panel>
         </div>
         <p:dialog id="dialogo" widgetVar="wdialogo" header="CAMBIO DE CONTRASEÑAS" modal="true" resizable="false" closeOnEscape="true" draggable="false">
-            <p:growl id="pass"/>
+            <p:growl id="pass" life="1000"/>
             <h:form id="frmDialogo">
 
                 <h:panelGrid columns="2">
                     <label>CONTRASEÑA ANTERIOR</label>     
 
                     <p:password value="#{asignacionBean.password}" id="passanterior" 
-                                required="true" requiredMessage="falta la contraseña anterior"
+                                required="true" requiredMessage="falta la contraseña anterior en campo"
                                 label="USERNAME:"/>
 
                     <label>NUEVA CONTRASEÑA:</label>
-                    <p:password value="#{asignacionBean.newPassword}" id="password"                          
+                    <p:password value="#{asignacionBean.newPassword}" id="password"   required="true"
+                                requiredMessage="falta la nueva contraseña"
                                 label="PASSWORD:"/>
 
                     <label>REPETIR NUEVA CONTRASEÑA</label> 
-                    <p:password value="#{asignacionBean.rNewPassword}" id="repeatpassword"                               
+                    <p:password value="#{asignacionBean.rNewPassword}" id="repeatpassword"  
+                                required="true" requiredMessage="falta la repetir contraseña"
                                 label="PASSWORD:"/>
-                    <p:commandButton value="ACEPTAR CAMBIOS" actionListener="#{asignacionBean.cambiarPassword}" oncomplete="PF('wdialogo').hide();" icon="ui-icon-check" update="pass">
-                         <p:confirm message="Seguro que deseas aceptar los cambio?" header="Aviso" icon="ui-icon-alert"/>
+                    <p:commandButton value="ACEPTAR CAMBIOS" actionListener="#{asignacionBean.cambiarPassword}"  icon="ui-icon-check" update="pass">
+                        <p:confirm message="Seguro que deseas aceptar los cambio?" header="Aviso" icon="ui-icon-alert"/>
                     </p:commandButton>
                 </h:panelGrid>
             </h:form>

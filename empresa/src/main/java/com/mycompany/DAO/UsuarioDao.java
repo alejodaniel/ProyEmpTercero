@@ -19,6 +19,12 @@ public class UsuarioDao extends DAOAbstract<Usuario> {
         return query.getResultList();
 
     }
+    
+    public List<Usuario> buscarTodosExceptUserLogeado(String user) {
+        Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_login <>'" + user + "'");
+        return query.getResultList();
+
+    }
 
     public boolean verificacionPassword(String pass) {
         Query query = this.getEntityManager().createQuery("Select u from Usuario u where u.usu_password=" + pass);

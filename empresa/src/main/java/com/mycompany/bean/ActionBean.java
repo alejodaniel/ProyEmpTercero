@@ -45,7 +45,7 @@ public class ActionBean {
     private LoginBean loginBean;
 
     public ActionBean() {
-        System.out.println("otro bean");    
+        System.out.println("otro bean");
         loginBean = getLoginBean();
         user = loginBean.getUser();
         usuarios = loginBean.getUsuarios();
@@ -65,17 +65,17 @@ public class ActionBean {
         System.out.println("se ha seleccionado la tabla para asignar rol: " + u.getUsu_login());
         //LoginBean lb = new LoginBean();
         loginBean.setUsuarioFlotante(u);
-        
+
         RequestContext context = RequestContext.getCurrentInstance();
-          System.out.println("paso al siguiente nivel" + context);
+        System.out.println("paso al siguiente nivel" + context);
         context.addCallbackParam("view", "asignaciones.xhtml");
-         System.out.println("fin de llegada" + loginBean);
+        System.out.println("fin de llegada" + loginBean);
 
     }
 
     public List<Usuario> getUsuario() {
         UsuarioDao ud = new UsuarioDao(usuario);
-        usuarios = ud.buscarTodos();
+        usuarios = ud.buscarTodosExceptUserLogeado(user);
         System.out.println("Array de Usuarios:" + usuarios);
         return usuarios;
     }
